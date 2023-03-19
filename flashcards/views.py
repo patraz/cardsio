@@ -25,8 +25,6 @@ def form(request):
             # create a form instance and populate it with data from the request:
             form = FlashcarForm(request.POST, request = request)
             # check whether it's valid:
-
-            print(form)
             if form.is_valid():
                 user_prompt = form.cleaned_data['prompt']
                 amount = form.cleaned_data['amount']
@@ -118,7 +116,6 @@ class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
         filename = os.path.basename(deck.csv.name)
-        
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
@@ -128,19 +125,27 @@ class XlsxDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
         filename = os.path.basename(deck.excl.name)
-        print(filename)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
         return response
     
+
+def download_file(filetype, kwargs):
+    deck = Deck.objects.get(pk=kwargs['pk'])
+    filename = os.path.basename(deck.filetype.name)
+    response = HttpResponse(deck.filetype, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+    return response
+
     
 class ApkgDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
         filename = os.path.basename(deck.anki.name)
-        print(filename)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
         return response
+    
