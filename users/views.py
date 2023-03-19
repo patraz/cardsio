@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -102,9 +102,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
             }
         )
 
-        return JsonResponse({
-            "id": session.id
-        })
+        return redirect(session.url, code=303)
 
 class SuccessView(generic.TemplateView):
     template_name = "success.html"
