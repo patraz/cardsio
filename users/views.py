@@ -147,7 +147,7 @@ def stripe_webhook(request, *args, **kwargs):
         elif amount_total == 1000:
             user.point_balance = user.point_balance + 30000
             user.save()
-        elif amount_total == 20000:
+        elif amount_total == 2000:
             user.point_balance = user.point_balance + 100000
             user.save()
 
