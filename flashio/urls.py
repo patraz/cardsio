@@ -27,10 +27,7 @@ from users.views import SuccessView, PricingView, CreateCheckoutSessionView, str
 
 urlpatterns = [
     path("", generic.TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path('admin/', admin.site.urls),
-    path("create-admin/", admin_create, name="admin-create"),
-    path("migrate/", migrate, name="migrate"),
-    path("makemigrations/", makemigrations, name="makemigrations"),
+    path('admin/', admin.site.urls),    
     path("form/", form, name="form"),
     path("decks/", UserDecksListView.as_view(), name="user-decks"),
     path('decks/<int:pk>/', DeckDetailView.as_view(), name='deck-detail'),
@@ -53,6 +50,9 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
+        path("create-admin/", admin_create, name="admin-create"),
+        path("migrate/", migrate, name="migrate"),
+        path("makemigrations/", makemigrations, name="makemigrations"),
         path(
             "400/",
             default_views.bad_request,
