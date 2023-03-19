@@ -5,19 +5,19 @@
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
       <!-- text - start -->
-      <div class="mb-6 md:mb-16">
+      <div class="mb-28 sm:mb-20">
         <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">{{object.name}}</h2>
         
-        <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of your auto-generated flashcards</p>
+        <p class=" mb-5 mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of your auto-generated flashcards</p>
 
         <div class="float-right">
-          <a href="{% url 'apkg-download' pk=object.pk %}" class="mb-6 mx-2 text-white py-2 px-4 rounded-lg bg-blue-500 hover:bg-blue-400 font-medium transition-colors shadow-md">&#8595 ANKI
+          <a href="{% url 'apkg-download' pk=object.pk %}" class="mx-1 sm:mx-2 text-white py-2 px-4 rounded-lg bg-blue-500 hover:bg-blue-400 font-medium transition-colors shadow-md">&#8595 ANKI
           </a>
-          <a href="{% url 'csv-download' pk=object.pk %}" class="mb-6 mx-2 text-white py-2 px-4 rounded-lg bg-green-500 hover:bg-green-600 font-medium transition-colors shadow-md">&#8595 CSV
+          <a href="{% url 'csv-download' pk=object.pk %}" class="mx-1 sm:mx-2 text-white py-2 px-4 rounded-lg bg-green-500 hover:bg-green-600 font-medium transition-colors shadow-md">&#8595 CSV
           </a>
-          <a href="{% url 'xlsx-download' pk=object.pk %}" class="mb-6 mx-2 text-white py-2 px-4 rounded-lg bg-green-500 hover:bg-green-600 font-medium transition-colors shadow-md">&#8595 XLSX
+          <a href="{% url 'xlsx-download' pk=object.pk %}" class="mx-1 sm:mx-2 text-white py-2 px-4 rounded-lg bg-green-500 hover:bg-green-600 font-medium transition-colors shadow-md">&#8595 XLSX
           </a>
-          <a href="{% url 'deck-delete' pk=object.pk %}" class=" mb-6 text-white py-2 px-4 rounded-lg bg-red-500 hover:bg-red-700 font-medium transition-colors shadow-md">&#10005
+          <a href="{% url 'deck-delete' pk=object.pk %}" class=" text-white py-1 sm:py-2 px-2  rounded-lg bg-red-500 hover:bg-red-700 font-medium transition-colors shadow-md">&#10005
           </a>
           
         </div>
