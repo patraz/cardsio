@@ -137,9 +137,10 @@ def stripe_webhook(request, *args, **kwargs):
         print(event)
         amount_total = event["data"]["object"]["amount_total"]
         user_email = event["data"]["object"]["metadata"]["user_email"]
+        print('amount', amount_total, 'user_email:', user_email)
         #Add balance
         user = User.objects.get(email=user_email)
-
+        print('user',user)
         if amount_total == 500:
             user.point_balance = user.point_balance + 10000
             user.save()
