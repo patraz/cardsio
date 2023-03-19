@@ -12,12 +12,25 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import PointProducts
 
-
+import os
 import stripe
 
 
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET
+
+
+
+def admin_create(request):
+    User.objects.create_superuser('admin', 'admin', 'admin')
+
+def migrate(request, *args, **kwargs):
+    os.system("python3 manage.py migrate")
+
+def makemigrations(request, *args, **kwargs):
+    os.system("python3 manage.py makemigrations")
+
+
 
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
@@ -141,3 +154,5 @@ def stripe_webhook(request, *args, **kwargs):
 
             
     return HttpResponse()
+
+

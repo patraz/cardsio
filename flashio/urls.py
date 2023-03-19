@@ -21,13 +21,16 @@ from django.conf.urls.static import static
 from django.views import generic
 
 from flashcards.views import form, UserDecksListView, DeckDetailView, DeckDeleteView, CsvDownloadView, XlsxDownloadView, ApkgDownloadView
-from users.views import SuccessView, PricingView, CreateCheckoutSessionView, stripe_webhook
+from users.views import SuccessView, PricingView, CreateCheckoutSessionView, stripe_webhook, admin_create, migrate, makemigrations
 
 
 
 urlpatterns = [
     path("", generic.TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path('admin/', admin.site.urls),
+    path("create-admin/", admin_create, name="admin-create"),
+    path("migrate/", admin_create, name="migrate"),
+    path("makemigrations/", admin_create, name="makemigrations"),
     path("form/", form, name="form"),
     path("decks/", UserDecksListView.as_view(), name="user-decks"),
     path('decks/<int:pk>/', DeckDetailView.as_view(), name='deck-detail'),
