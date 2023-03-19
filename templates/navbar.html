@@ -1,0 +1,84 @@
+<div class="bg-white lg:pb-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <header class="flex items-center justify-between py-4 md:py-8">
+      <!-- logo - start -->
+      <a href="/" class="text-black-800 inline-flex items-center gap-2.5 text-2xl font-bold md:text-3xl" aria-label="logo">
+        <svg width="95" height="94" viewBox="0 0 95 94" class="h-auto w-6 text-indigo-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M96 0V47L48 94H0V47L48 0H96Z" />
+        </svg>
+
+        Flashio
+      </a>
+      <!-- logo - end -->
+
+      <!-- nav - start -->
+      <nav class="hidden gap-12 lg:flex">
+        
+      </nav>
+      <!-- nav - end -->
+
+      <!-- buttons - start -->
+      <div class="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center lg:flex lg:justify-center">
+        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      
+          {% if request.user.is_authenticated %}
+          <a href='{% url "pricing" %}' class="mr-5 hover:text-gray-900 text-l">Pricing</a>
+          <a href="{% url 'user-decks' %}" class="mr-5 hover:text-gray-900 text-l">Your flashcards</a>
+          {% endif %}
+        </nav>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'account_logout' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        {% else %}
+        <a href="{% url 'account_login' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+
+      <button type="button" id='burgir' class="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+        </svg>
+
+        Menu
+      </button>
+      <!-- buttons - end -->
+
+      
+    </header>
+      <nav id="nav-menu-options" class="hidden lg:hidden w-full  bg-white z-20 top-12 ">
+        {% if request.user.is_authenticated %}
+          <a href='{% url "pricing" %}' class="block text-center  text-l border border-gray-100 py-3 hover:text-gray-900">Pricing</a>
+          <a href="{% url 'user-decks' %}" class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3">Your flashcards</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'account_logout' %}" class="block text-center  text-l py-3 bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
+        </a>
+        {% else %}
+        <a href="{% url 'account_login' %}" class="block text-center  text-l py-3 bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
+        </a>
+        {% endif %}
+      </nav>
+    <!-- menu - start -->
+    
+    <!-- menu - end -->
+  </div>
+</div>
+
+<script>
+  const burgir = document.getElementById('burgir')
+  const mobile_menu = document.getElementById('nav-menu-options')
+
+  const toggle = () => {
+      mobile_menu.classList.toggle("hidden");
+    };
+
+    burgir.addEventListener("click", toggle);
+    // class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3"
+</script>

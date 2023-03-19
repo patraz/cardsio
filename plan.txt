@@ -1,0 +1,7 @@
+- user have to have points 
+
+- form that takes this info to make prompts
+-storing response in database
+
+
+-generating from this json --> csv ---> anki
