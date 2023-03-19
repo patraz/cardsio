@@ -78,9 +78,8 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         plan = PointProducts.objects.get(price=kwargs["price"])
 
-        domain = "https://domain.com"
-        if settings.DEBUG:
-            domain = "https://29e3-109-173-214-110.eu.ngrok.io"
+
+        domain = "https://ombdgiyqxw.eu11.qoddiapp.com"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
