@@ -15,7 +15,7 @@ class Deck(models.Model):
     name = models.CharField(max_length=200)
     flashcards = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    csv = models.FileField(max_length=100, null=True, blank=True, default="file.csv", upload_to='csv_files/')
+    csv = models.FileField(max_length=100, null=True, blank=True, upload_to='csv_files/')
     excl = models.FileField(max_length=100, null=True, blank=True, upload_to='xlsx_files/')
     anki = models.FileField(max_length=100, null=True, blank=True, upload_to='apkg_files/')
 
@@ -37,15 +37,26 @@ def delete_deck_files(sender, instance, **kwargs):
     """
     # Delete CSV file
     if instance.csv:
-        os.remove(instance.csv.path)
+        try:
+            os.remove(instance.csv.path)
+        except Exception as e:
+            # Code to handle the exception
+            print("An error occurred:", e)
 
-    # Delete EXCL file
     if instance.excl:
-        os.remove(instance.excl.path)
+        try:
+            os.remove(instance.excl.path)
+        except Exception as e:
+            # Code to handle the exception
+            print("An error occurred:", e)
 
-    # Delete Anki file
     if instance.anki:
-        os.remove(instance.anki.path)
+        try:
+            os.remove(instance.anki.path)
+        except Exception as e:
+            # Code to handle the exception
+            print("An error occurred:", e)
+
 
 
 

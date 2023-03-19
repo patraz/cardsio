@@ -3,22 +3,6 @@ import genanki
 import csv
 import random
 
-
-list =[['Question', 'Jaki jest kolor sierści kota syjamskiego?', 'Answer', 'Ciemny brąz lub czarny'], ['Question', 'Jakie są cechy charakterystyczne kota brytyjskiego?', 'Answer', 'Krótka sierść, duże uszy i okrągłe oczy'], ['Question', 'Jakie są cechy charakterystyczne kota perskiego?', 'Answer', 'Długa sierść, duże oczy i krótkie uszy'], ['Question', 'Jaki jest kolor sierści kota rosyjskiego niebieskiego?', 'Answer', 'Niebieski'], ['Question', 'Jaki jest kolor sierści kota sfinksa?', 'Answer', 'Brak sierści'], ['Question', 'Jakie są cechy charakterystyczne kota syberyjskiego?', 'Answer', 'Gruba sierść, duże uszy i okrągłe oczy'], ['Question', 'Jaki jest kolor sierści kota bengalskiego?', 'Answer', 'Ciemny brąz lub czarny z jasnymi plamami'], ['Question', 'Jakie są cechy charakterystyczne kota ragdolla?', 'Answer', 'Długa sierść, duże oczy i krótkie uszy'], ['Question', 'Jaki jest kolor sierści kota norweskiego leśnego?', 'Answer', 'Ciemny brąz lub czarny z jasnymi plamami'], ['Question', 'Jakie są cechy charakterystyczne kota maine coona?', 'Answer', 'Gruba sierść, duże uszy i okrągłe oczy']]
-
-list_1 = []
-list_2 = []
-
-for item in list:
-    list_1.append(item[1])
-    list_2.append(item[3])
-
-
-
-# df = pandas.DataFrame(data={"col1": list_1, "col2": list_2})
-# df.to_csv("./file.csv", sep=',',index=False)
-
-
 def create_xlsx(list, pk):
     list_1 = []
     list_2 = []
@@ -68,7 +52,7 @@ def create_apkg_from_csv(deck_pk):
     ])
 
     # Read the data from the CSV file
-    with open(f'./csv_files/{deck_pk}.csv', 'r') as file:
+    with open(f'./csv_files/{deck_pk}.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader) # Skip the header row
         notes = [genanki.Note(
