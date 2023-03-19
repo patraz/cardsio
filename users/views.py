@@ -98,7 +98,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
             success_url=domain + reverse("success"),
             cancel_url=domain + reverse("user-decks"),
             metadata={
-                "user_email": request.user.email
+                "user_email": request.user.email,
             }
         )
 
