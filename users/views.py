@@ -30,7 +30,16 @@ if settings.DEBUG:
     def makemigrations(request, *args, **kwargs):
         os.system("python3 manage.py makemigrations")
 
+else:
 
+    def admin_create(request):
+        pass
+
+    def migrate(request, *args, **kwargs):
+        pass
+
+    def makemigrations(request, *args, **kwargs):
+        pass
 
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
