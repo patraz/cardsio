@@ -136,7 +136,7 @@ def stripe_webhook(request, *args, **kwargs):
     if event["type"] == CHECKOUT_SESSION_COMPLETED:
         print(event)
         amount_total = event["data"]["object"]["amount_total"]
-        user_email = event["data"]["object"]["metadata"]["user_email"]
+        user_email = event["data"]["object"]["user_email"]
         #Add balance
         user = User.objects.get(email=user_email)
 
