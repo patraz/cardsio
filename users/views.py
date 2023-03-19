@@ -19,16 +19,16 @@ import stripe
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET
 
+if settings.DEBUG:
 
+    def admin_create(request):
+        User.objects.create_superuser('admin', 'admin', 'admin')
 
-def admin_create(request):
-    User.objects.create_superuser('admin', 'admin', 'admin')
+    def migrate(request, *args, **kwargs):
+        os.system("python3 manage.py migrate")
 
-def migrate(request, *args, **kwargs):
-    os.system("python3 manage.py migrate")
-
-def makemigrations(request, *args, **kwargs):
-    os.system("python3 manage.py makemigrations")
+    def makemigrations(request, *args, **kwargs):
+        os.system("python3 manage.py makemigrations")
 
 
 
