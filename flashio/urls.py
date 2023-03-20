@@ -20,8 +20,26 @@ from django.views import defaults as default_views
 from django.conf.urls.static import static
 from django.views import generic
 
-from flashcards.views import form, UserDecksListView, DeckDetailView, DeckDeleteView, CsvDownloadView, XlsxDownloadView, ApkgDownloadView
-from users.views import SuccessView, PricingView, CreateCheckoutSessionView, stripe_webhook, admin_create, migrate, makemigrations
+from flashcards.views import (
+    form,
+    form_text, 
+    UserDecksListView, 
+    DeckDetailView, 
+    DeckDeleteView, 
+    CsvDownloadView, 
+    XlsxDownloadView, 
+    ApkgDownloadView, 
+    DecksListView
+) 
+from users.views import (
+    SuccessView, 
+    PricingView, 
+    CreateCheckoutSessionView, 
+    stripe_webhook, 
+    admin_create, 
+    migrate, 
+    makemigrations
+) 
 
 
 
@@ -29,7 +47,10 @@ urlpatterns = [
     path("", generic.TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path('admin/', admin.site.urls),    
     path("form/", form, name="form"),
+    path("form-text/", form_text, name="form-text"),
     path("decks/", UserDecksListView.as_view(), name="user-decks"),
+    path("decks/all/", DecksListView.as_view(), name="all-decks"),
+
     path('decks/<int:pk>/', DeckDetailView.as_view(), name='deck-detail'),
     path('decks/delete/<int:pk>', DeckDeleteView.as_view(), name='deck-delete'),
     path("decks/download-csv/<int:pk>", CsvDownloadView.as_view(), name="csv-download"),

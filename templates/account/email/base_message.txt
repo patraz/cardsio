@@ -1,8 +1,8 @@
 
-{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from gumroad-clone!{% endblocktrans %}
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}Hello from Flashio!{% endblocktrans %}
 
 {% block content %}{% endblock %}
 
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using gumroad-clone!
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using flashio!
 {{ site_domain }}{% endblocktrans %}
 {% endautoescape %}
