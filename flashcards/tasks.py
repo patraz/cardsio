@@ -38,9 +38,6 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     print(user.point_balance)
     d_old_str = resp.replace('\n', '').replace('”','').replace('„','') # remove all \n
 
-    if resp[-3:] != '"]]':
-        resp = resp[:-3] + '"]]'
-
     deck = Deck.objects.create(name = user_prompt, list=d_old_str, user=user)
                 
     f_cards = create_list_of_flashcards(d_old_str)
