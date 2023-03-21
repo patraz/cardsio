@@ -85,12 +85,11 @@ class DecksListView(generic.ListView):
     context_object_name = 'decks'
     paginate_by=10
     def get_queryset(self):
-        qs = Deck.objects.get_queryset().order_by('-id')
-        
+        qs = Deck.objects.get_queryset()
         title = self.request.GET.get('title', None)
         if title:
-            qs = qs.filter(name__icontains=title).order_by('-id')
-        return qs
+            qs = qs.filter(name__icontains=title)
+        return qs.order_by('-id')
 
 
 class UserDecksListView(generic.ListView):
@@ -102,7 +101,7 @@ class UserDecksListView(generic.ListView):
         title = self.request.GET.get('title', None)
         if title:
             qs = qs.filter(name__icontains=title)
-        return qs
+        return qs.order_by('-id')
 
 class DeckDetailView(generic.ListView):
     template_name = "detail.html"
