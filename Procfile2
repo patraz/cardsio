@@ -1,0 +1,4 @@
+
+release: python manage.py makemigrations
+release: python manage.py migrate
+web: celery -A flashio worker -l info -P gevent
