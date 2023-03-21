@@ -156,9 +156,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT=os.path.join(BASE_DIR, "static/")
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/'),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -220,3 +220,5 @@ STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
 #Celery
 
 CELERY_BROKER_URL=env('CELERY_BROKER_URL')
+CELERY_WORKER_MAX_TASKS_PER_CHILD=500
+CELERY_ACKS_LATE=True

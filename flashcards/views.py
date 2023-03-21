@@ -114,9 +114,7 @@ class DeckDetailView(generic.ListView):
         return Flashcard.objects.filter(deck=deck)
     def get_context_data(self, **kwargs):
         context = super(DeckDetailView, self).get_context_data(**kwargs)
-        
         deck = Deck.objects.get(pk=self.kwargs["pk"])
-
         flashcards = deck.flashcard_set.count()
         context.update({
             'object':deck,
