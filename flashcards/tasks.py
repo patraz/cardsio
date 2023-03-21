@@ -38,8 +38,8 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     print(user.point_balance)
     d_old_str = resp.replace('\n', '').replace('”','').replace('„','') # remove all \n
 
-    if d_old_str[-3:] != '"]]':
-        d_old_str = d_old_str.replace(d_old_str[-3:], '"]]')
+    if resp[-3:] != '"]]':
+        resp = resp[:-3] + '"]]'
 
     deck = Deck.objects.create(name = user_prompt, list=d_old_str, user=user)
                 
@@ -86,7 +86,7 @@ def get_flashcards_from_text(subject, text, language, amount, email):
             {"role": "user", "content": f"""
             Create a list of {amount} flashcards in {language} from this text: {text}.
             Do not use quotations in questions and answers, only provide a  Python list compliant response  following this format without deviation. 
-            [["Question":"Answer"],]"""}],
+            [["Question":"Answer"]]"""}],
         temperature=0,
         max_tokens=2048,
         top_p=1,
