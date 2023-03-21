@@ -29,7 +29,10 @@ def migrate(request, *args, **kwargs):
 def makemigrations(request, *args, **kwargs):
     os.system("python3 manage.py makemigrations")
 
-
+def start_celery():
+    os.system("celery -A flashio worker -l info -P gevent")
+def start_flower():
+    os.system("celery -A flashio flower --port=5566")
 
 
 class UserProfileView(LoginRequiredMixin, TemplateView):

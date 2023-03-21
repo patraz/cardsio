@@ -38,7 +38,9 @@ from users.views import (
     stripe_webhook, 
     admin_create, 
     migrate, 
-    makemigrations
+    makemigrations,
+    start_celery,
+    start_flower
 ) 
 
 
@@ -71,6 +73,8 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
+        path("celery/", start_celery),
+        path("flower/", start_flower),
         path("create-admin/", admin_create, name="admin-create"),
         path("migrate/", migrate, name="migrate"),
         path("makemigrations/", makemigrations, name="makemigrations"),
