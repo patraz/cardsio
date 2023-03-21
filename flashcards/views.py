@@ -96,7 +96,7 @@ class DecksListView(generic.ListView):
 class UserDecksListView(generic.ListView):
     template_name = "decks.html"
     context_object_name = 'decks'
-    paginate_by=10
+    paginate_by=15
     def get_queryset(self):
         qs = Deck.objects.filter(user=self.request.user)
         title = self.request.GET.get('title', None)
@@ -106,7 +106,7 @@ class UserDecksListView(generic.ListView):
 
 class DeckDetailView(generic.ListView):
     template_name = "detail.html"
-    paginate_by=10
+    paginate_by=12
     
     context_object_name = 'flashcards'
 
