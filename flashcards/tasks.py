@@ -2,6 +2,7 @@ from celery import shared_task
 
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.core.mail import send_mail
 
 from .utils import create_csv, create_xlsx, create_apkg_from_csv, create_list_of_flashcards
 from .models import Deck, Flashcard
@@ -9,6 +10,10 @@ from .models import Deck, Flashcard
 import openai
 
 User = get_user_model()
+
+from_email = settings.DEFAULT_FROM_EMAIL
+subject = '[Flashio] Your flashcards are ready'
+
 
 openai.api_key = settings.OPENAI_KEY 
 
@@ -56,6 +61,9 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     deck.save()
     for x in f_cards:
                 Flashcard.objects.create(question=x[0], answer=x[1], deck=deck)
+    recipient_list = [f'{email}']
+    message = f'Flashio generated {len(f_cards)} flashcards about {user_prompt}, check them at your dashboard'
+    send_mail(subject, message, from_email, recipient_list)
     return
 
 @shared_task
@@ -117,4 +125,7 @@ def get_flashcards_from_text(subject, text, language, amount, email):
     deck.save()
     for x in f_cards:
                 Flashcard.objects.create(question=x[0], answer=x[1], deck=deck)
+    recipient_list = [f'{email}']
+    message = f'Flashio generated {len(f_cards)} flashcards about {subject}, check them at your dashboard'
+    send_mail(subject, message, from_email, recipient_list)
     return       
