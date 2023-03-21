@@ -96,7 +96,7 @@ class DecksListView(generic.ListView):
 class UserDecksListView(generic.ListView):
     template_name = "decks.html"
     context_object_name = 'decks'
-    paginate_by=15
+    paginate_by=10
     def get_queryset(self):
         qs = Deck.objects.filter(user=self.request.user)
         title = self.request.GET.get('title', None)
