@@ -29,9 +29,9 @@ def migrate(request, *args, **kwargs):
 def makemigrations(request, *args, **kwargs):
     os.system("python3 manage.py makemigrations")
 
-def start_celery():
+def start_celery(request):
     os.system("celery -A flashio worker -l info -P gevent")
-def start_flower():
+def start_flower(request):
     os.system("celery -A flashio flower --port=5566")
 
 
