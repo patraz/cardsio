@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sites', # new
 
     # 3rd party
+    'django_celery_beat',
     'allauth', # new
     'allauth.account', # new
     'allauth.socialaccount', # new
@@ -208,3 +209,7 @@ OPENAI_KEY = env("OPENAI_KEY")
 STRIPE_SECRET= env('STRIPE_SECRET')
 STRIPE_PUBLIC = env("STRIPE_PUBLIC")
 STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
+
+#Celery
+
+CELERY_BROKER_URL=env('CELERY_BROKER_URL')

@@ -28,16 +28,6 @@ def create_csv(list, pk):
     df = pd.DataFrame(data=d)
     return df.to_csv(f"./csv_files/{pk}.csv", index=False)
 
-
-def create_flashcards(str):
-        l_cards = str.replace(":", ",")
-        list_from_string = ast.literal_eval(l_cards)
-        return list_from_string
-
-
-# Define the fields for your Anki notes
-
-
 def create_apkg_from_csv(deck_pk):
     my_model = genanki.Model(
     random.randrange(1 << 30, 1 << 31),
@@ -77,3 +67,8 @@ def create_apkg_from_csv(deck_pk):
     # Create the Anki package and write it to a file
     my_package = genanki.Package(my_deck)
     return my_package.write_to_file(f'./apkg_files/{deck_pk}.apkg')
+
+def create_list_of_flashcards(d_old_str):
+        l_cards = d_old_str.replace(":", ",")
+        list_from_string = ast.literal_eval(l_cards)
+        return list_from_string

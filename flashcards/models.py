@@ -26,13 +26,8 @@ class Deck(models.Model):
     def get_absolute_url(self):
         return reverse("Deck_detail", kwargs={"pk": self.pk})
     
-    def create_list_of_flashcards(self):
-        l_cards = self.list.replace(":", ",")
-        list_from_string = ast.literal_eval(l_cards)
-        return list_from_string
-    
     def cost(self):
-        list = Deck.create_list_of_flashcards(self)
+        list = self.list
         return len(list) *120
     
 class Flashcard(models.Model):
