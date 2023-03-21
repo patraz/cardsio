@@ -27,8 +27,8 @@ class Deck(models.Model):
         return reverse("Deck_detail", kwargs={"pk": self.pk})
     
     def cost(self):
-        list = self.list
-        return len(list) *120
+        flashcards = self.flashcard_set.count()
+        return len(flashcards) *120
     
 class Flashcard(models.Model):
     deck = models.ForeignKey(Deck,  on_delete=models.CASCADE)
