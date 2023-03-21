@@ -28,7 +28,7 @@ class Deck(models.Model):
     
     def cost(self):
         flashcards = self.flashcard_set.count()
-        return len(flashcards) *120
+        return flashcards *120
     
 class Flashcard(models.Model):
     deck = models.ForeignKey(Deck,  on_delete=models.CASCADE)
