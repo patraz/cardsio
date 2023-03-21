@@ -17,9 +17,10 @@
             </a>
             <a href="{% url 'xlsx-download' pk=object.pk %}" class="mx-1 sm:mx-2 text-white py-2 px-2 sm:px-4 rounded-lg bg-green-500 hover:bg-green-600 font-medium transition-colors shadow-md">&#8595 XLSX
             </a>
+            {% if request.user == object.user %}
             <a href="{% url 'deck-delete' pk=object.pk %}" class=" text-white py-2 px-2  rounded-lg bg-red-500 hover:bg-red-700 font-medium transition-colors shadow-md">&#10005
             </a>
-            
+            {% endif %}
           </div> 
         
         </div>

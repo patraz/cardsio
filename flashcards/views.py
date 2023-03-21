@@ -106,7 +106,6 @@ class UserDecksListView(generic.ListView):
 class DeckDetailView(generic.ListView):
     template_name = "detail.html"
     paginate_by=12
-    
     context_object_name = 'flashcards'
 
 
