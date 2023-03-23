@@ -33,7 +33,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env('DEBUG') == 'True'
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
 
 # Application definition
@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'flashio.urls'
@@ -96,12 +97,7 @@ WSGI_APPLICATION = 'flashio.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
 
 DATABASES = {
     'default': {
@@ -220,5 +216,7 @@ STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
 #Celery
 
 CELERY_BROKER_URL=env('CELERY_BROKER_URL')
-CELERY_WORKER_MAX_TASKS_PER_CHILD=500
-CELERY_ACKS_LATE=True
+
+
+#Whitenoise
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
