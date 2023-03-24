@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
 
-from .utils import create_csv, create_xlsx, create_apkg_from_csv, create_list_of_flashcards
+from .utils import create_list_of_flashcards
 from .models import Deck, Flashcard
 
 import openai
@@ -50,7 +50,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     if d_old_str[-3:] != '"]]':
         d_old_str = d_old_str[:-3] + '"]]'
     print('po zmianie',d_old_str[-3:])
-    
+
     f_cards = create_list_of_flashcards(d_old_str)
 
     deck = Deck.objects.create(name = subject, list=f_cards, user=user)
