@@ -49,7 +49,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
 
     try:
         f_cards = create_list_of_flashcards(d_old_str)
-    except IndexError:
+    except:
         last_bracket_index = d_old_str.rfind(']')
         x = d_old_str[:last_bracket_index+1] + ']'
         f_cards = create_list_of_flashcards(x)
@@ -107,7 +107,7 @@ def get_flashcards_from_text(subject, text, language, amount, email):
 
     try:
         f_cards = create_list_of_flashcards(d_old_str)
-    except IndexError:
+    except:
         last_bracket_index = d_old_str.rfind(']')
         x = d_old_str[:last_bracket_index+1] + ']'
         f_cards = create_list_of_flashcards(x)
