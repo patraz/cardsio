@@ -65,15 +65,15 @@ def delete_deck_files(sender, instance, **kwargs):
             print("An error occurred:", e)
 
 
-@receiver(post_init, sender=Deck)
-def create_deck_files(sender, instance, **kwargs):
-    create_xlsx(instance.list, instance.pk)
-    create_csv(instance.list, instance.pk)
-    create_apkg_from_csv(instance.pk)
-    xlsx_file=f"./xlsx_files/{instance.pk}.xlsx"
-    csv_file = f"./csv_files/{instance.pk}.csv"
-    apkg_file = f"./apkg_files/{instance.pk}.apkg"
-    instance.excl = xlsx_file
-    instance.csv = csv_file
-    instance.anki = apkg_file       
+# @receiver(post_init, sender=Deck)
+# def create_deck_files(sender, instance, **kwargs):
+#     create_xlsx(instance.list, instance.pk)
+#     create_csv(instance.list, instance.pk)
+#     create_apkg_from_csv(instance.pk)
+#     xlsx_file=f"./xlsx_files/{instance.pk}.xlsx"
+#     csv_file = f"./csv_files/{instance.pk}.csv"
+#     apkg_file = f"./apkg_files/{instance.pk}.apkg"
+#     instance.excl = xlsx_file
+#     instance.csv = csv_file
+#     instance.anki = apkg_file       
 
