@@ -55,7 +55,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
         f_cards = create_list_of_flashcards(x)
 
 
-    deck = Deck.objects.create(name = subject, list=f_cards, user=user)
+    deck = Deck.objects.create(name = user_prompt, list=f_cards, user=user)
 
     for x in f_cards:
                 Flashcard.objects.create(question=x[0], answer=x[1], deck=deck)
