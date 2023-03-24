@@ -10,9 +10,11 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
+from flashcards.utils import create_apkg_from_csv
+
 from .forms import FlashcarForm, FlashcardTextForm
 from .models import Deck, Flashcard
-from .tasks import get_flashcards_from_prompt, get_flashcards_from_text
+from .tasks import get_flashcards_from_prompt, get_flashcards_from_text, download_anki
 
 from allauth.account.decorators import verified_email_required
 
@@ -148,22 +150,15 @@ class XlsxDownloadView(generic.View):
 
         return response
     
-
-def download_file(filetype, kwargs):
-    deck = Deck.objects.get(pk=kwargs['pk'])
-    filename = os.path.basename(deck.filetype.name)
-    response = HttpResponse(deck.filetype, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
-    return response
-
     
 class ApkgDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        create_apkg_from_csv(deck.pk)
+        apkg_file = f"./apkg_files/{deck.pk}.apkg"
+        deck.anki = apkg_file
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
         return response
     
