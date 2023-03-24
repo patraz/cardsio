@@ -44,7 +44,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     user.save()
     resp = response["choices"][0]["message"].content
 
-    d_old_str = resp.replace('\n', '').replace('”','').replace('„','') # remove all \n
+    d_old_str = resp.replace('”','').replace('„','') # remove all \n
 
 
     print(d_old_str[-3:])
