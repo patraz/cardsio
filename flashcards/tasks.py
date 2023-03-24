@@ -47,12 +47,13 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     d_old_str = resp.replace('”','').replace('„','') # remove all \n
 
 
-    print(d_old_str[-3:])
-    if d_old_str[-3:] != '"]]':
-        d_old_str = d_old_str[:-3] + '"]]'
-    print('po zmianie',d_old_str[-3:])
+    try:
+        f_cards = create_list_of_flashcards(d_old_str)
+    except IndexError:
+        last_bracket_index = d_old_str.rfind(']')
+        x = d_old_str[:last_bracket_index+1] + ']'
+        f_cards = create_list_of_flashcards(x)
 
-    f_cards = create_list_of_flashcards(d_old_str)
 
     deck = Deck.objects.create(name = subject, list=f_cards, user=user)
 
@@ -104,12 +105,12 @@ def get_flashcards_from_text(subject, text, language, amount, email):
     
     d_old_str = resp.replace('\n', '').replace('”','').replace('„','') # remove all \n
 
-    print(d_old_str[-3:])
-    if d_old_str[-3:] != '"]]':
-        d_old_str = d_old_str[:-3] + '"]]'
-    print('po zmianie',d_old_str[-3:])
-
-    f_cards = create_list_of_flashcards(d_old_str)
+    try:
+        f_cards = create_list_of_flashcards(d_old_str)
+    except IndexError:
+        last_bracket_index = d_old_str.rfind(']')
+        x = d_old_str[:last_bracket_index+1] + ']'
+        f_cards = create_list_of_flashcards(x)
 
     deck = Deck.objects.create(name = subject, list=f_cards, user=user)
 
