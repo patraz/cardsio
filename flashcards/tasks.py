@@ -29,8 +29,10 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
             {"role": "system", "content": "You are an expert that creates flashcards anout given topic"},
             {"role": "user", "content": f"""
             Create a list of {amount} flashcards in {language} about {user_prompt}.
-            Do not use quotations in questions and answers, only provide a  Python list compliant response  following this format without deviation. 
-            [["Question":"Answer"],]"""}],
+            Only provide a  Python list compliant response  following this format without deviation. 
+            [
+            ["Question":"Answer"],
+            ]"""}],
         temperature=0,
         max_tokens=3877,
         top_p=1,
