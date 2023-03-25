@@ -108,11 +108,11 @@ def get_flashcards_from_text(subject, text, language, amount, email):
     d_old_str = resp.replace('\n', '').replace('”','').replace('„','') # remove all \n
 
     try:
-        f_cards = create_list_of_flashcards(d_old_str)
+        f_cards = create_list_of_flashcards(str(d_old_str))
     except:
         last_bracket_index = d_old_str.rfind(']')
         x = d_old_str[:last_bracket_index+1] + ']'
-        f_cards = create_list_of_flashcards(x)
+        f_cards = create_list_of_flashcards(str(x))
 
     deck = Deck.objects.create(name = subject, list=f_cards, user=user)
 
