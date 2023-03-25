@@ -48,11 +48,13 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
 
 
     try:
-        f_cards = d_old_str
+        print("1 proba",  type(d_old_str))
+        f_cards = create_list_of_flashcards(str(d_old_str))
     except:
+        print("2 proba",  type(d_old_str))
         last_bracket_index = d_old_str.rfind(']')
         x = d_old_str[:last_bracket_index+1] + ']'
-        f_cards = x
+        f_cards = create_list_of_flashcards(str(x))
 
 
     deck = Deck.objects.create(name = user_prompt, list=f_cards, user=user)
