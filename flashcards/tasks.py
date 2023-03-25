@@ -60,7 +60,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     deck = Deck.objects.create(name = user_prompt, list=f_cards, user=user)
 
     for x in f_cards:
-                Flashcard.objects.create(question=x[0], answer=x[1], deck=deck)
+        Flashcard.objects.create(question=x[0], answer=x[1], deck=deck)
     recipient_list = [f'{email}']
     message = f'Flashio generated {len(f_cards)} flashcards about {user_prompt}, check them at your dashboard'
     send_mail(subject, message, from_email, recipient_list)
