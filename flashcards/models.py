@@ -26,7 +26,7 @@ class Deck(models.Model):
         return self.name
 
     def print_flashcards(self):
-        return('lista', type(self.list), self.list)
+        print('lista', type(self.list), self.list)
 
 
     def get_absolute_url(self):
