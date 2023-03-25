@@ -12,7 +12,17 @@ from flashcards.utils import create_apkg_from_csv, create_csv, create_xlsx
 
 User = get_user_model()
 
-
+def create_deck_files(list, instance):
+    create_xlsx(instance.list, instance.pk)
+    create_csv(instance.list, instance.pk)
+    create_apkg_from_csv(instance.pk)
+    xlsx_file=f"./xlsx_files/{instance.pk}.xlsx"
+    csv_file = f"./csv_files/{instance.pk}.csv"
+    apkg_file = f"./apkg_files/{instance.pk}.apkg"
+    instance.excl = xlsx_file
+    instance.csv = csv_file
+    instance.anki = apkg_file
+    instance.save()       
 
 class Deck(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -28,6 +38,7 @@ class Deck(models.Model):
     def print_flashcards(self):
         list_from_string = ast.literal_eval(self.list)
         print(type(list_from_string), list_from_string)
+        create_deck_files(list_from_string, self)
 
     def get_absolute_url(self):
         return reverse("Deck_detail", kwargs={"pk": self.pk})
@@ -67,18 +78,4 @@ def delete_deck_files(sender, instance, **kwargs):
         except Exception as e:
             # Code to handle the exception
             print("An error occurred:", e)
-
-
-# @receiver(post_init, sender=Deck)
-# def create_deck_files(sender, instance, **kwargs):
-#     create_xlsx(instance.list, instance.pk)
-#     create_csv(instance.list, instance.pk)
-#     create_apkg_from_csv(instance.pk)
-#     xlsx_file=f"./xlsx_files/{instance.pk}.xlsx"
-#     csv_file = f"./csv_files/{instance.pk}.csv"
-#     apkg_file = f"./apkg_files/{instance.pk}.apkg"
-#     instance.excl = xlsx_file
-#     instance.csv = csv_file
-#     instance.anki = apkg_file
-#     instance.save()       
 
