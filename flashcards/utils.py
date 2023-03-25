@@ -5,8 +5,6 @@ import random
 import ast
 
 def create_xlsx(list, pk):
-    list = create_list_of_flashcards(list)
-
     list_1 = []
     list_2 = []
 
@@ -19,7 +17,6 @@ def create_xlsx(list, pk):
     return df.to_excel(f"./xlsx_files/{pk}.xlsx", index=False)
 
 def create_csv(list, pk):
-    list = create_list_of_flashcards(list)
     list_1 = []
     list_2 = []
 
