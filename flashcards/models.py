@@ -37,7 +37,6 @@ class Deck(models.Model):
 
     def print_flashcards(self):
         list_from_string = ast.literal_eval(self.list)
-        print(type(list_from_string), list_from_string)
         create_deck_files(list_from_string, self)
 
     def get_absolute_url(self):
