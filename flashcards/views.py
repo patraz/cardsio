@@ -136,7 +136,6 @@ class DeckDeleteView(generic.DeleteView):
 class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
-        deck.print_flashcards()
         filename = os.path.basename(deck.csv.name)
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename

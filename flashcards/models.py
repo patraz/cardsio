@@ -35,7 +35,7 @@ class Deck(models.Model):
     def __str__(self):
         return self.name
 
-    def print_flashcards(self):
+    def __init__(self):
         list_from_string = ast.literal_eval(self.list)
         create_deck_files(list_from_string, self)
 
