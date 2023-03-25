@@ -26,8 +26,8 @@ class Deck(models.Model):
         return self.name
 
     def print_flashcards(self):
-        print('lista', type(self.list), self.list)
-
+        list_from_string = ast.literal_eval(self.list)
+        print(type(list_from_string), list_from_string)
 
     def get_absolute_url(self):
         return reverse("Deck_detail", kwargs={"pk": self.pk})
