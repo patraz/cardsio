@@ -35,7 +35,8 @@ class Deck(models.Model):
     def __str__(self):
         return self.name
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         list_from_string = ast.literal_eval(self.list)
         create_deck_files(list_from_string, self)
 
