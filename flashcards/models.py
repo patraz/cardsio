@@ -13,8 +13,8 @@ from flashcards.utils import create_apkg_from_csv, create_csv, create_xlsx
 User = get_user_model()
 
 def create_deck_files(list, instance):
-    create_xlsx(instance.list, instance.pk)
-    create_csv(instance.list, instance.pk)
+    create_xlsx(list, instance.pk)
+    create_csv(list, instance.pk)
     create_apkg_from_csv(instance.pk)
     xlsx_file=f"./xlsx_files/{instance.pk}.xlsx"
     csv_file = f"./csv_files/{instance.pk}.csv"
