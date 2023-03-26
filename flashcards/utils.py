@@ -5,6 +5,7 @@ import random
 import ast
 
 def create_xlsx(list, pk):
+    list = ast.literal_eval(list)
     list_1 = []
     list_2 = []
 
@@ -17,6 +18,7 @@ def create_xlsx(list, pk):
     return df.to_excel(f"./xlsx_files/{pk}.xlsx", index=False)
 
 def create_csv(list, pk):
+    list = ast.literal_eval(list)
     list_1 = []
     list_2 = []
 
