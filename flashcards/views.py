@@ -10,7 +10,7 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from flashcards.utils import create_apkg_from_csv
+from flashcards.utils import create_apkg_from_csv, create_csv, create_xlsx
 
 from .forms import FlashcarForm, FlashcardTextForm
 from .models import Deck, Flashcard
@@ -136,6 +136,10 @@ class DeckDeleteView(generic.DeleteView):
 class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        create_csv(deck.list, deck.pk)
+        csv_file = f"./csv_files/{deck.pk}.csv"
+        deck.csv = csv_file
+        deck.save()
         filename = os.path.basename(deck.csv.name)
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -145,6 +149,10 @@ class CsvDownloadView(generic.View):
 class XlsxDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        create_xlsx(deck.list, deck.pk)
+        xlsx_file=f"./xlsx_files/{deck.pk}.xlsx"
+        deck.excl = xlsx_file
+        deck.save()
         filename = os.path.basename(deck.excl.name)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -155,6 +163,23 @@ class XlsxDownloadView(generic.View):
 class ApkgDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        print("ANKI", deck.anki)
+        try:
+            create_apkg_from_csv(deck.pk)
+            apkg_file = f"./apkg_files/{deck.pk}.apkg"
+            deck.anki = apkg_file
+            deck.save()
+        except FileNotFoundError:
+            create_csv(deck.list, deck.pk)
+            csv_file = f"./csv_files/{deck.pk}.csv"
+            deck.csv = csv_file
+            create_apkg_from_csv(deck.pk)
+            apkg_file = f"./apkg_files/{deck.pk}.apkg"
+            deck.anki = apkg_file
+            deck.save()
+        except ValueError:
+            print("dupa")
+
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename

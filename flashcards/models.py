@@ -35,10 +35,10 @@ class Deck(models.Model):
     def __str__(self):
         return self.name
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # list_from_string = ast.literal_eval(self.list)
-        create_deck_files(self.list, self)
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     list_from_string = ast.literal_eval(self.list)
+    #     create_deck_files(self.list, self)
 
     def get_absolute_url(self):
         return reverse("Deck_detail", kwargs={"pk": self.pk})

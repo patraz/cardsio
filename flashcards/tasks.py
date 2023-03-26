@@ -56,6 +56,7 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
         x = d_old_str[:last_bracket_index+1] + ']'
         f_cards = create_list_of_flashcards(x)
 
+    print(f_cards)
 
     deck = Deck.objects.create(name = user_prompt, list=f_cards, user=user)
 
