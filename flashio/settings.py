@@ -224,4 +224,4 @@ CELERY_BROKER_URL=env('CELERY_BROKER_URL')
 
 
 #Whitenoise
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
