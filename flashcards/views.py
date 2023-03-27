@@ -1,11 +1,10 @@
 import os
 
 from django.contrib import messages
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 
-from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -163,7 +162,6 @@ class XlsxDownloadView(generic.View):
 class ApkgDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
-        print("ANKI", deck.anki)
         try:
             create_apkg_from_csv(deck.pk)
             apkg_file = f"./apkg_files/{deck.pk}.apkg"
@@ -178,7 +176,7 @@ class ApkgDownloadView(generic.View):
             deck.anki = apkg_file
             deck.save()
         except ValueError:
-            print("dupa")
+            print("Value Error")
 
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')

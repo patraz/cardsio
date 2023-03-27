@@ -8,31 +8,15 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView, TemplateView
 from django.conf import settings
 from django.views import generic
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import PointProducts
 
-import os
 import stripe
 
 
 User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET
 
-
-def admin_create(request):
-    User.objects.create_superuser('admin', 'admin', 'admin')
-
-def migrate(request, *args, **kwargs):
-    os.system("python3 manage.py migrate")
-
-def makemigrations(request, *args, **kwargs):
-    os.system("python3 manage.py makemigrations")
-
-def start_celery(request):
-    os.system("celery -A flashio worker -l info")
-def start_flower(request):
-    os.system("celery -A flashio flower --port=5566")
 
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
