@@ -78,8 +78,10 @@ def get_flashcards_from_text(subject, text, language, amount, email):
             {"role": "system", "content": "Jesteś pomocnym asystentem i expertem, który tworzy flashcards na dany temat"},
             {"role": "user", "content": f"""
             Stwórz listę {amount} flashcards w języku {language} z tego tekstu: {text}.
-            Do not use quotations in questions and answers, only provide a  Python list compliant response  following this format without deviation. 
-            [["Pytanie":"Odpowiedź"],]"""}],
+            Only provide a  Python list compliant response  following this format without deviation. 
+            [
+            ["Question":"Answer"],
+            ]"""}],
         temperature=0,
         max_tokens=2048,
         top_p=1,
@@ -93,8 +95,10 @@ def get_flashcards_from_text(subject, text, language, amount, email):
             {"role": "system", "content": "You are an expert that creates flashcards anout given topic"},
             {"role": "user", "content": f"""
             Create a list of {amount} flashcards in {language} from this text: {text}.
-            Do not use quotations in questions and answers, only provide a  Python list compliant response  following this format without deviation. 
-            [["Question":"Answer"]]"""}],
+            Only provide a  Python list compliant response  following this format without deviation. 
+            [
+            ["Question":"Answer"],
+            ]"""}],
         temperature=0,
         max_tokens=2048,
         top_p=1,
