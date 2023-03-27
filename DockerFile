@@ -1,0 +1,14 @@
+FROM python:3.9-slim-bullseye
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . /usr/src/app
+
+EXPOSE 80
+COPY ./runserver.sh /usr/local/bin/
+RUN sed -i 's/\r$//' runserver.sh
+CMD ["sh", "runserver.sh"]

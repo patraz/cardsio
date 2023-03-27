@@ -1,0 +1,1 @@
+celery -A flashio worker -l info

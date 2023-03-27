@@ -5,11 +5,11 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 import os
-import ast
+
+
 # Create your models here.
 
 User = get_user_model()
-
 
 
 class Deck(models.Model):
@@ -61,8 +61,4 @@ def delete_deck_files(sender, instance, **kwargs):
         except Exception as e:
             # Code to handle the exception
             print("An error occurred:", e)
-
-
-
-
 

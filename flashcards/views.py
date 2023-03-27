@@ -1,14 +1,15 @@
 import os
 
 from django.contrib import messages
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 
-from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.contrib.auth import get_user_model
 from django.conf import settings
+
+from flashcards.utils import create_apkg_from_csv, create_csv, create_xlsx
 
 from .forms import FlashcarForm, FlashcardTextForm
 from .models import Deck, Flashcard
@@ -112,6 +113,7 @@ class DeckDetailView(generic.ListView):
     def get_queryset(self,*args, **kwargs):
         deck = Deck.objects.get(pk=self.kwargs["pk"])
         return Flashcard.objects.filter(deck=deck)
+    
     def get_context_data(self, **kwargs):
         context = super(DeckDetailView, self).get_context_data(**kwargs)
         deck = Deck.objects.get(pk=self.kwargs["pk"])
@@ -133,6 +135,10 @@ class DeckDeleteView(generic.DeleteView):
 class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        create_csv(deck.list, deck.pk)
+        csv_file = f"./csv_files/{deck.pk}.csv"
+        deck.csv = csv_file
+        deck.save()
         filename = os.path.basename(deck.csv.name)
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
@@ -142,28 +148,38 @@ class CsvDownloadView(generic.View):
 class XlsxDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        create_xlsx(deck.list, deck.pk)
+        xlsx_file=f"./xlsx_files/{deck.pk}.xlsx"
+        deck.excl = xlsx_file
+        deck.save()
         filename = os.path.basename(deck.excl.name)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
         return response
     
-
-def download_file(filetype, kwargs):
-    deck = Deck.objects.get(pk=kwargs['pk'])
-    filename = os.path.basename(deck.filetype.name)
-    response = HttpResponse(deck.filetype, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
-    return response
-
     
 class ApkgDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
+        try:
+            create_apkg_from_csv(deck.pk)
+            apkg_file = f"./apkg_files/{deck.pk}.apkg"
+            deck.anki = apkg_file
+            deck.save()
+        except FileNotFoundError:
+            create_csv(deck.list, deck.pk)
+            csv_file = f"./csv_files/{deck.pk}.csv"
+            deck.csv = csv_file
+            create_apkg_from_csv(deck.pk)
+            apkg_file = f"./apkg_files/{deck.pk}.apkg"
+            deck.anki = apkg_file
+            deck.save()
+        except ValueError:
+            print("Value Error")
+
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
         return response
     

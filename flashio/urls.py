@@ -35,12 +35,7 @@ from users.views import (
     SuccessView, 
     PricingView, 
     CreateCheckoutSessionView, 
-    stripe_webhook, 
-    admin_create, 
-    migrate, 
-    makemigrations,
-    start_celery,
-    start_flower
+    stripe_webhook,
 ) 
 
 
@@ -66,18 +61,13 @@ urlpatterns = [
     # User management
     path("users/", include("users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
-        path("celery/", start_celery),
-        path("flower/", start_flower),
-        path("create-admin/", admin_create, name="admin-create"),
-        path("migrate/", migrate, name="migrate"),
-        path("makemigrations/", makemigrations, name="makemigrations"),
         path(
             "400/",
             default_views.bad_request,
