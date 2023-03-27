@@ -1,1 +1,1 @@
-web: celery -A flashio worker -l info
+web: celery -A flashio worker -l info -P gevent
