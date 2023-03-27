@@ -223,5 +223,7 @@ STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET")
 CELERY_BROKER_URL=env('CELERY_BROKER_URL')
 
 
+
 #Whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
