@@ -14,7 +14,7 @@ class User(AbstractUser):
     """
 
     #: First and last name do not cover name patterns around the globe
-    point_balance = models.IntegerField(default=1000)
+    point_balance = models.IntegerField(default=5000)
     stripe_customer_id=models.CharField(max_length=200, blank=True, null=True)
     def get_absolute_url(self):
         """Get url for user's detail view.
