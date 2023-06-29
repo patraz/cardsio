@@ -9,7 +9,7 @@ class FlashcarForm(forms.Form):
 
      
     prompt = forms.CharField(label='What it the topic you want flashcards to have?', max_length=200)
-    amount = forms.IntegerField(label='What amount of flashcards would you like to create?', min_value=5, max_value=100)
+    amount = forms.IntegerField(label='What amount of flashcards would you like to create?', min_value=5, max_value=20)
     language = forms.ChoiceField(label='Which language you want your flashcards to be in?', choices=LANGUAGE_CHOICES)
 
     def __init__(self, *args, **kwargs):

@@ -40,7 +40,7 @@ def form_text(request):
 
                 get_flashcards_from_text.delay(amount=amount, language=language, subject=subject, text=text, email=request.user.email)
 
-                messages.success(request, 'Creating flashcards can take a while, refresh your decks later')
+                messages.success(request, 'Creating flashcards can take a while, you will get an e-mail when they are done :)')
                 return redirect("user-decks")
 
         # if a GET (or any other method) we'll create a blank form
@@ -126,7 +126,7 @@ class DeckDetailView(generic.ListView):
     
 class DeckDeleteView(generic.DeleteView):
     model = Deck
-    success_url = reverse_lazy('user-decks') # replace 'myapp:index' with the URL name of your view
+    success_url = reverse_lazy('user-decks') # 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'Object deleted successfully.')
         return super().delete(request, *args, **kwargs)
