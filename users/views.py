@@ -98,6 +98,13 @@ class PricingView(generic.TemplateView):
     template_name = "flashcards/pricing.html"
 
 
+def cancel_subscription(request):
+    user = request.user
+    sub_id = user.subscription.sub_id
+    stripe.Subscription.delete(
+    sub_id,
+    )
+
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
     CHECKOUT_SESSION_COMPLETED = "checkout.session.completed"
