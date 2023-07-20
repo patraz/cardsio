@@ -132,14 +132,15 @@ def stripe_webhook(request, *args, **kwargs):
         if amount_total == 1500:
             user.point_balance = user.point_balance + 200000
             user.save()
-    if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
+    elif event["type"] == SUBSCRIPTION_SESSION_UPDATED:
         print('user', user_email)
+        
         current_end_date = event["data"]["object"]["current_period_end"]
-        user = User.objects.get(email=user_email)
-        print(user)
-        user.subscription.start_date = datetime.datetime.now()
-        user.subscription.end_date = datetime.datetime.fromtimestamp(current_end_date)
-        user.save()
+        # user = User.objects.get(email=user_email)
+        # print(user)
+        # user.subscription.start_date = datetime.datetime.now()
+        # user.subscription.end_date = datetime.datetime.fromtimestamp(current_end_date)
+        # user.save()
     return HttpResponse()
 
 
