@@ -3,7 +3,7 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from users.forms import UserChangeForm, UserCreationForm
-from .models import PointProducts, Subscription
+from .models import PointProducts
 
 User = get_user_model()
 
@@ -38,4 +38,4 @@ class UserAdmin(auth_admin.UserAdmin):
 
 admin.site.register(PointProducts)
 
-admin.site.register(Subscription)
+# admin.site.register(Subscription)
