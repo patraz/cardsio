@@ -123,17 +123,25 @@ def stripe_webhook(request, *args, **kwargs):
         # print(event)
         amount_total = event["data"]["object"]["amount_total"]
         user_email = event["data"]["object"]["metadata"]["user_email"]
+        subscription = event["data"]["object"]["subscription"]
         # print('amount', amount_total, 'user_email:', user_email)
         #Add balance
+        sub = stripe.Subscription.retrieve(
+        subscription
+        )
         user = User.objects.get(email=user_email)
         # print('user',user)
         if amount_total == 1500:
             user.point_balance = user.point_balance + 200000
+            user.subscription.start_date = datetime.datetime.fromtimestamp(sub["current_period_start"])
+            user.subscription.end_date = datetime.datetime.fromtimestamp(sub["current_period_end"])
+            user.subscription.sub_id = subscription
+            user.subscription.is_active = True
             user.save()
-    if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
-        print('user', user_email)
+    # if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
+    #     print('user', user_email)
         
-        current_end_date = event["data"]["object"]["current_period_end"]
+    #     current_end_date = event["data"]["object"]["current_period_end"]
         # user = User.objects.get(email=user_email)
         # print(user)
         # user.subscription.start_date = datetime.datetime.now()

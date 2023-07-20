@@ -37,15 +37,8 @@ class Subscription(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription')
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
+    sub_id = models.CharField(max_length=150, null=True, blank=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username}'s Subscription"
-
-    # def activate(self):
-    #     self.is_active = True
-    #     self.save()
-
-    # def deactivate(self):
-    #     self.is_active = False
-    #     self.end_date = None
-    #     self.save()
