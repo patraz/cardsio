@@ -110,7 +110,7 @@ def cancel_subscription(request):
     url = response['items']['url']
     messages.warning(request, 'Subscription canceled')
 
-    return reverse("users:detail")
+    return reverse("users:detail",kwargs={"username": request.user.username})
 
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
