@@ -132,7 +132,6 @@ def stripe_webhook(request, *args, **kwargs):
         user = User.objects.get(email=user_email)
         Subscription.objects.create(user=user, start_date=datetime.datetime.fromtimestamp(sub["current_period_start"]),
                                     end_date=datetime.datetime.fromtimestamp(sub["current_period_end"]),
-                                    start_date = datetime.datetime.fromtimestamp(sub["current_period_start"]),
                                     sub_id = subscription,
                                     is_active = True)
         # print('user',user)
