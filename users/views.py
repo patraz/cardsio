@@ -65,7 +65,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
         plan = PointProducts.objects.get(price=kwargs["price"])
 
 
-        domain = "http://127.0.0.1:8000"
+        domain = "https://flashio.co"
         session = stripe.checkout.Session.create(
             line_items=[
                 {
@@ -122,19 +122,21 @@ def stripe_webhook(request, *args, **kwargs):
     user_email = ''
 
     if event["type"] == CHECKOUT_SESSION_COMPLETED:
-        print(event)
+        # print(event)
         amount_total = event["data"]["object"]["amount_total"]
         user_email = event["data"]["object"]["metadata"]["user_email"]
-        print('amount', amount_total, 'user_email:', user_email)
+        # print('amount', amount_total, 'user_email:', user_email)
         #Add balance
         user = User.objects.get(email=user_email)
-        print('user',user)
+        # print('user',user)
         if amount_total == 1500:
             user.point_balance = user.point_balance + 200000
             user.save()
     if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
+        print('user', user_email)
         current_end_date = event["data"]["object"]["current_period_end"]
         user = User.objects.get(email=user_email)
+        print(user)
         user.subscription.start_date = datetime.datetime.now()
         user.subscription.end_date = datetime.datetime.fromtimestamp(current_end_date)
         user.save()
