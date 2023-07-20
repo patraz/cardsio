@@ -66,7 +66,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
 
 
         domain = "https://flashio.co"
-        session = stripe.checkout.Session.create(
+        session = stripe.Subscription.Session.create(
             line_items=[
                 {
                     # 'price_data': {
@@ -118,8 +118,6 @@ def stripe_webhook(request, *args, **kwargs):
     except stripe.error.SignatureVerificationError as e:
         print(e)
         return HttpResponse(status=400)
-
-    user_email = ''
 
     if event["type"] == CHECKOUT_SESSION_COMPLETED:
         # print(event)
