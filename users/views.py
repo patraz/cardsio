@@ -66,7 +66,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
 
 
         domain = "https://flashio.co"
-        session = stripe.Subscription.Session.create(
+        session = stripe.checkout.Session.create(
             line_items=[
                 {
                     # 'price_data': {
