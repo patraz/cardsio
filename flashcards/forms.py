@@ -35,9 +35,9 @@ class FlashcardTextForm(forms.Form):
 
     
     subject = forms.CharField(label='Whats the subject of your text?', max_length=100)
-    text = forms.CharField(label='Your Text', widget=forms.Textarea, max_length=5000)
+    text = forms.CharField(label='Your Text', widget=forms.Textarea, max_length=19000)
     language = forms.ChoiceField(label='Which language you want your flashcards to be in?', choices=LANGUAGE_CHOICES)
-    amount = forms.IntegerField(label='What amount of flashcards would you like to create?', min_value=5, max_value=30)
+    amount = forms.IntegerField(label='What amount of flashcards would you like to create?', min_value=5, max_value=45)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request") # store value of request 

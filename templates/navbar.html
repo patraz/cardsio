@@ -1,4 +1,4 @@
-<div class="bg-white lg:pb-12">
+<div class="bg-gray-50 ">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
     <header class="flex items-center justify-between py-4 md:py-8">
       <!-- logo - start -->
@@ -198,13 +198,13 @@
           {% endif %}
         </nav>
         {% if request.user.is_authenticated %}
-        <a href="{% url 'account_logout' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
+        <a href="{% url 'account_logout' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
           <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
         {% else %}
-        <a href="{% url 'account_login' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
+        <a href="{% url 'account_login' %}" class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-fuchsia-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
           <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
@@ -228,10 +228,10 @@
           <a href='{% url "pricing" %}' class="block text-center  text-l border border-gray-100 py-3 hover:text-gray-900">Pricing</a>
           <a href="{% url 'all-decks' %}" class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3">All flashcards</a>
           <a href="{% url 'user-decks' %}" class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3">Your flashcards</a>
-          <a href="{% url 'account_logout' %}" class="block text-center  text-l py-3 bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
+          <a href="{% url 'account_logout' %}" class="block text-center  text-l py-3 bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-fuchsia-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Logout
         </a>
         {% else %}
-        <a href="{% url 'account_login' %}" class="block text-center  text-l py-3 bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
+        <a href="{% url 'account_login' %}" class="block text-center  text-l py-3 bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-fuchsia-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Login
         </a>
         {% endif %}
       </nav>

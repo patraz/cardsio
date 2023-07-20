@@ -10,7 +10,7 @@ from django.conf import settings
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from .models import PointProducts
-
+import datetime
 import stripe
 
 
@@ -65,23 +65,23 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
         plan = PointProducts.objects.get(price=kwargs["price"])
 
 
-        domain = "https://flashio.patraz.online"
+        domain = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
             line_items=[
                 {
-                    'price_data': {
-                        'currency': 'usd',
-                        'product_data': {
-                            'name': f'{plan.points} points',
-                        },
-                        'unit_amount': plan.price,
-                    },
+                    # 'price_data': {
+                    #     'currency': 'usd',
+                    #     'product_data': {
+                    #         'name': f'{plan.points} points',
+                    #     },
+                    #     'unit_amount': plan.price,
+                    # },
+                    'price': 'price_1NVwrBEiQ1AZTnsD46E4xKbE',
                     'quantity': 1,
                     
                 }
             ],
-            mode='payment',
+            mode='subscription',
             success_url=domain + reverse("success"),
             cancel_url=domain + reverse("user-decks"),
             metadata={
@@ -101,6 +101,7 @@ class PricingView(generic.TemplateView):
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
     CHECKOUT_SESSION_COMPLETED = "checkout.session.completed"
+    SUBSCRIPTION_SESSION_UPDATED = "customer.subscription.updated"
     payload = request.body
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     
@@ -118,7 +119,7 @@ def stripe_webhook(request, *args, **kwargs):
         print(e)
         return HttpResponse(status=400)
 
-
+    user_email = ''
 
     if event["type"] == CHECKOUT_SESSION_COMPLETED:
         print(event)
@@ -128,17 +129,15 @@ def stripe_webhook(request, *args, **kwargs):
         #Add balance
         user = User.objects.get(email=user_email)
         print('user',user)
-        if amount_total == 500:
-            user.point_balance = user.point_balance + 10000
+        if amount_total == 1500:
+            user.point_balance = user.point_balance + 200000
             user.save()
-        elif amount_total == 1000:
-            user.point_balance = user.point_balance + 30000
-            user.save()
-        elif amount_total == 2000:
-            user.point_balance = user.point_balance + 100000
-            user.save()
-
-            
+    if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
+        current_end_date = event["data"]["object"]["current_period_end"]
+        user = User.objects.get(email=user_email)
+        user.subscription.start_date = datetime.datetime.now()
+        user.subscription.end_date = datetime.datetime.fromtimestamp(current_end_date)
+        user.save()
     return HttpResponse()
 
 
