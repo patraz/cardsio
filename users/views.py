@@ -9,7 +9,7 @@ from django.views.generic import DetailView, RedirectView, UpdateView, TemplateV
 from django.conf import settings
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-from .models import PointProducts
+from .models import PointProducts, Subscription
 import datetime
 import stripe
 
@@ -130,13 +130,14 @@ def stripe_webhook(request, *args, **kwargs):
         subscription
         )
         user = User.objects.get(email=user_email)
+        Subscription.objects.create(user=user, start_date=datetime.datetime.fromtimestamp(sub["current_period_start"]),
+                                    end_date=datetime.datetime.fromtimestamp(sub["current_period_end"]),
+                                    start_date = datetime.datetime.fromtimestamp(sub["current_period_start"]),
+                                    sub_id = subscription,
+                                    is_active = True)
         # print('user',user)
         if amount_total == 1500:
             user.point_balance = user.point_balance + 200000
-            user.subscription.start_date = datetime.datetime.fromtimestamp(sub["current_period_start"])
-            user.subscription.end_date = datetime.datetime.fromtimestamp(sub["current_period_end"])
-            user.subscription.sub_id = subscription
-            user.subscription.is_active = True
             user.save()
     # if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
     #     print('user', user_email)
