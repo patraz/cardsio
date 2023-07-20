@@ -101,9 +101,10 @@ class PricingView(generic.TemplateView):
 def cancel_subscription(request):
     user = request.user
     sub_id = user.subscription.sub_id
-    stripe.Subscription.delete(
+    response = stripe.Subscription.delete(
     sub_id,
     )
+    return redirect(response.items.url, code=303)
 
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
