@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import PointProducts, Subscription
 import datetime
 import stripe
+from django.contrib import messages
 
 
 User = get_user_model()
@@ -100,12 +101,16 @@ class PricingView(generic.TemplateView):
 
 def cancel_subscription(request):
     user = request.user
+    subscription = Subscription.objects.get(user=user)
     sub_id = user.subscription.sub_id
     response = stripe.Subscription.delete(
     sub_id,
     )
+    subscription.delete()
     url = response['items']['url']
-    return redirect(url, code=303)
+    messages.warning(request, 'Subscription canceled')
+
+    return reverse("users:detail")
 
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
