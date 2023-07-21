@@ -132,6 +132,19 @@ class DeckDeleteView(generic.DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
+# class CsvDownloadView(generic.View):
+#     def get(self, request, *args, **kwargs):
+#         deck = Deck.objects.get(pk=kwargs['pk'])
+#         create_csv(deck.list, deck.pk)
+#         csv_file = f"./csv_files/{deck.pk}.csv"
+#         deck.csv = csv_file
+#         deck.save()
+#         filename = os.path.basename(deck.csv.name)
+#         response = HttpResponse(deck.csv, content_type='text/plain')
+#         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+#         return response
+    
 class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
@@ -140,11 +153,24 @@ class CsvDownloadView(generic.View):
         deck.csv = csv_file
         deck.save()
         filename = os.path.basename(deck.csv.name)
+
+        # Create the FileResponse with the CSV file
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
+        # Define the after_request hook to delete the CSV file after download
+        def after_request(response):
+            # Remove the CSV file from the server after download
+            os.remove(deck.csv.path)
+            
+
+        # Attach the after_request hook to the response
+        response.add_post_render_callback(after_request)
+
         return response
-    
+
+
+
 class XlsxDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
@@ -155,7 +181,13 @@ class XlsxDownloadView(generic.View):
         filename = os.path.basename(deck.excl.name)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        def after_request(response):
+            # Remove the CSV file from the server after download
+            os.remove(deck.excl.path)
+            
 
+        # Attach the after_request hook to the response
+        response.add_post_render_callback(after_request)
         return response
     
     
@@ -181,5 +213,12 @@ class ApkgDownloadView(generic.View):
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        def after_request(response):
+            # Remove the CSV file from the server after download
+            os.remove(deck.anki.path)
+            
+
+        # Attach the after_request hook to the response
+        response.add_post_render_callback(after_request)
         return response
     

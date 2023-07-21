@@ -102,15 +102,21 @@ class PricingView(generic.TemplateView):
 def cancel_subscription(request):
     user = request.user
     subscription = Subscription.objects.get(user=user)
-    sub_id = user.subscription.sub_id
-    response = stripe.Subscription.delete(
-    sub_id,
-    )
-    subscription.delete()
-    url = response['items']['url']
-    messages.warning(request, 'Subscription canceled')
+    sub_id = subscription.sub_id
 
-    return reverse("users:detail",kwargs={"username": request.user.username})
+    # Delete the subscription in Stripe
+    try:
+        response = stripe.Subscription.delete(sub_id)
+        if response['status'] == 'canceled':
+            # Subscription canceled successfully, delete the local subscription object
+            subscription.delete()
+            messages.warning(request, 'Subscription canceled')
+        else:
+            messages.error(request, 'Failed to cancel subscription. Please try again.')
+    except stripe.error.StripeError as e:
+        messages.error(request, f"An error occurred: {str(e)}")
+
+    return redirect("users:detail", username=request.user.username)
 
 @csrf_exempt
 def stripe_webhook(request, *args, **kwargs):
