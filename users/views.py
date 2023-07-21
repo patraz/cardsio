@@ -105,18 +105,18 @@ def cancel_subscription(request):
     sub_id = subscription.sub_id
 
     # Delete the subscription in Stripe
-    response = stripe.Subscription.delete(sub_id)
-    print(response)
-    # try:
-    #     response = stripe.Subscription.delete(sub_id)
-    #     if response['status'] == 'canceled':
-    #         # Subscription canceled successfully, delete the local subscription object
-    #         subscription.delete()
-    #         messages.warning(request, 'Subscription canceled')
-    #     else:
-    #         messages.error(request, 'Failed to cancel subscription. Please try again.')
-    # except stripe.error.StripeError as e:
-    #     messages.error(request, f"An error occurred: {str(e)}")
+    
+    try:
+        response = stripe.Subscription.delete(sub_id)
+        print(response)
+        if response['status'] == 'canceled':
+            # Subscription canceled successfully, delete the local subscription object
+            subscription.delete()
+            messages.warning(request, 'Subscription canceled')
+        else:
+            messages.error(request, 'Failed to cancel subscription. Please try again.')
+    except stripe.error.StripeError as e:
+        messages.error(request, f"An error occurred: {str(e)}")
 
     return redirect("users:detail", username=request.user.username)
 
