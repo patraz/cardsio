@@ -77,7 +77,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
                     #     },
                     #     'unit_amount': plan.price,
                     # },
-                    'price': 'price_1NVwrBEiQ1AZTnsD46E4xKbE',
+                    'price': 'price_1NVwqCEiQ1AZTnsDHsnFqIrf',
                     'quantity': 1,
                     
                 }
