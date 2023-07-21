@@ -231,10 +231,17 @@
     </header>
       <nav id="nav-menu-options" class="hidden lg:hidden w-full  bg-white z-20 top-12 ">
         {% if request.user.is_authenticated %}
-          <a href='{% url "pricing" %}' class="block text-center  text-l border border-gray-100 py-3 hover:text-gray-900">Pricing</a>
-          <a href="{% url 'all-decks' %}" class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3">All flashcards</a>
-          <a href="{% url 'user-decks' %}" class="block text-center hover:text-gray-900 text-l border border-gray-100 py-3">Your flashcards</a>
-          <a href="{% url 'users:detail' username=request.user.username %}" class="block text-center  text-l py-3 bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-fuchsia-600 border border-transparent text-white text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800">Account
+          <a href='{% url "pricing" %}' class="p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center border-b-2">
+            <span class='font-medium'>Pricing</span>
+          </a>
+          <a href="{% url 'all-decks' %}" class="p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center border-b-2">
+            <span class='font-medium'>All flashcards</span>
+          </a>
+          <a href="{% url 'user-decks' %}" class="p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center border-b-2">
+            <span class='font-medium'>Your flashcards</span>
+          </a>
+          <a href="{% url 'users:detail' username=request.user.username %}" class="p-4 rounded bg-white text-indigo-500 shadow-md flex items-center justify-center">
+            <span class='pr-4 font-medium'>Account</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
