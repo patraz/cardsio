@@ -66,7 +66,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
         plan = PointProducts.objects.get(price=kwargs["price"])
 
 
-        domain = "http://127.0.0.1:8000"
+        domain = "http:flashio.co"
         session = stripe.checkout.Session.create(
             line_items=[
                 {
