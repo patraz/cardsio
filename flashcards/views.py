@@ -159,13 +159,13 @@ class CsvDownloadView(generic.View):
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
         # Define the after_request hook to delete the CSV file after download
-        def after_request(response):
+        def after_request():
             # Remove the CSV file from the server after download
             os.remove(deck.csv.path)
             
 
         # Attach the after_request hook to the response
-        response = after_request(request, response)
+        response.close = after_request
 
         return response
 
@@ -181,13 +181,15 @@ class XlsxDownloadView(generic.View):
         filename = os.path.basename(deck.excl.name)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
-        def after_request(response):
+        def after_request():
             # Remove the CSV file from the server after download
             os.remove(deck.excl.path)
             
 
+            # Attach the close_response method to the response
+        response.close = after_request
         # Attach the after_request hook to the response
-        response = after_request(request, response)
+        
         return response
     
     
@@ -213,12 +215,12 @@ class ApkgDownloadView(generic.View):
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
-        def after_request(response):
+        def after_request():
             # Remove the CSV file from the server after download
             os.remove(deck.anki.path)
             
 
         # Attach the after_request hook to the response
-        response = after_request(request, response)
+        response.close = after_request
         return response
     
