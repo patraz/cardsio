@@ -165,7 +165,7 @@ class CsvDownloadView(generic.View):
             
 
         # Attach the after_request hook to the response
-        response.add_post_render_callback(after_request)
+        response = after_request(request, response)
 
         return response
 
@@ -187,7 +187,7 @@ class XlsxDownloadView(generic.View):
             
 
         # Attach the after_request hook to the response
-        response.add_post_render_callback(after_request)
+        response = after_request(request, response)
         return response
     
     
@@ -219,6 +219,6 @@ class ApkgDownloadView(generic.View):
             
 
         # Attach the after_request hook to the response
-        response.add_post_render_callback(after_request)
+        response = after_request(request, response)
         return response
     
