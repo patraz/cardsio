@@ -43,8 +43,8 @@ def create_apkg_from_csv(deck_pk):
     templates=[
         {
         'name': 'Card 1',
-        'qfmt': '{{Front}}',
-        'afmt': '{{FrontSide}}<hr id="answer">{{Back}}',
+        'qfmt': '<div style="height:100%;font-family; arial;font-size: 20px;text-align: center;color: black;background-color: white">{{Front}}</div>',
+        'afmt': '<div style="height:100%;font-family; arial;font-size: 20px;text-align: center;color: black;background-color: white">{{FrontSide}}<hr id="answer">{{Back}}</div>',
         },
     ])
 
