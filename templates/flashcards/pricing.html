@@ -37,12 +37,19 @@
                             <span class="text-base font-medium text-gray-900"> Full flashcards Library </span>
                         </li>
                     </ul>
+                    {% if request.user.is_authenticated %}
                     <form action="{% url 'checkout' price=499 %}" method="post" class="mt-11">
-                      {%csrf_token%}
-                      <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
-                        Start now!
-                      </button>
-                    </form>
+                        {%csrf_token%}
+                        <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
+                          Start now!
+                        </button>
+                      </form>
+                    
+                    {% else %}
+                    <a href="{% url 'account_login' %}" type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
+                        Login to buy!
+                    </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="bg-white border-4 border-blue-600 rounded-md">
@@ -74,12 +81,18 @@
                             <span class="text-base font-medium text-gray-900"> Premium Support </span>
                         </li>
                     </ul>
+                    {% if request.user.is_authenticated %}
                     <form action="{% url 'checkout' price=799 %}" method="post">
-                      {%csrf_token%}
-                      <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
-                        Start now!
-                      </button>
+                        {%csrf_token%}
+                        <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
+                          Start now!
+                        </button>
                     </form>
+                    {% else %}
+                    <a href="{% url 'account_login' %}" type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-8 font-semibold text-white transition-all duration-200 rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:opacity-80 focus:opacity-80">
+                        Login to buy!
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
