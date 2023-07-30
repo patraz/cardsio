@@ -63,7 +63,7 @@ user_redirect_view = UserRedirectView.as_view()
 
 class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
-        plan = PointProducts.objects.get(price=kwargs["price"])
+        # plan = PointProducts.objects.get(price=kwargs["price"])
         price = kwargs["price"]
         if price == 499:
             domain = "https://flashio.co"
