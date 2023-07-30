@@ -70,7 +70,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
             session = stripe.checkout.Session.create(
                 line_items=[
                     {
-                        'price': 'price_1NZdiWEiQ1AZTnsDgAJhNUwj',
+                        'price': 'price_1NZdSaEiQ1AZTnsDAkUMLRTG',
                         'quantity': 1,
                         
                     }
@@ -87,7 +87,7 @@ class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
                     session = stripe.checkout.Session.create(
                         line_items=[
                             {
-                                'price': 'price_1NZdhqEiQ1AZTnsDiIL8ePdH',
+                                'price': 'price_1NXOe9EiQ1AZTnsD83iqur8Q',
                                 'quantity': 1,
                                 
                             }
