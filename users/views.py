@@ -160,10 +160,12 @@ def stripe_webhook(request, *args, **kwargs):
         subscription
         )
         user = User.objects.get(email=user_email)
-        Subscription.objects.create(user=user, start_date=datetime.datetime.fromtimestamp(sub["current_period_start"]),
-                                    end_date=datetime.datetime.fromtimestamp(sub["current_period_end"]),
-                                    sub_id = subscription,
-                                    is_active = True)
+        has_subscription = Subscription.objects.filter(user=user).exists()
+        if has_subscription is False:
+            Subscription.objects.create(user=user, start_date=datetime.datetime.fromtimestamp(sub["current_period_start"]),
+                                        end_date=datetime.datetime.fromtimestamp(sub["current_period_end"]),
+                                        sub_id = subscription,
+                                        is_active = True)
         # print('user',user)
         print(amount_total)
         if amount_total == 799:
