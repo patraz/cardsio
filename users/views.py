@@ -64,32 +64,41 @@ user_redirect_view = UserRedirectView.as_view()
 class CreateCheckoutSessionView(generic.View, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         plan = PointProducts.objects.get(price=kwargs["price"])
-
-
-        domain = "https://flashio.co"
-        session = stripe.checkout.Session.create(
-            line_items=[
-                {
-                    # 'price_data': {
-                    #     'currency': 'usd',
-                    #     'product_data': {
-                    #         'name': f'{plan.points} points',
-                    #     },
-                    #     'unit_amount': plan.price,
-                    # },
-                    'price': 'price_1NXOe9EiQ1AZTnsD83iqur8Q',
-                    'quantity': 1,
-                    
+        price = kwargs["price"]
+        if price == 499:
+            domain = "https://flashio.co"
+            session = stripe.checkout.Session.create(
+                line_items=[
+                    {
+                        'price': 'price_1NZdiWEiQ1AZTnsDgAJhNUwj',
+                        'quantity': 1,
+                        
+                    }
+                ],
+                mode='subscription',
+                success_url=domain + reverse("success"),
+                cancel_url=domain + reverse("user-decks"),
+                metadata={
+                    "user_email": request.user.email
                 }
-            ],
-            mode='subscription',
-            success_url=domain + reverse("success"),
-            cancel_url=domain + reverse("user-decks"),
-            metadata={
-                "user_email": request.user.email
-            }
-        )
-
+            )
+        elif price == 799:
+                    domain = "https://flashio.co"
+                    session = stripe.checkout.Session.create(
+                        line_items=[
+                            {
+                                'price': 'price_1NZdhqEiQ1AZTnsDiIL8ePdH',
+                                'quantity': 1,
+                                
+                            }
+                        ],
+                        mode='subscription',
+                        success_url=domain + reverse("success"),
+                        cancel_url=domain + reverse("user-decks"),
+                        metadata={
+                            "user_email": request.user.email
+                        }
+                    )
         return redirect(session.url, code=303)
 
 class SuccessView(generic.TemplateView):
@@ -146,7 +155,6 @@ def stripe_webhook(request, *args, **kwargs):
         amount_total = event["data"]["object"]["amount_total"]
         user_email = event["data"]["object"]["metadata"]["user_email"]
         subscription = event["data"]["object"]["subscription"]
-        # print('amount', amount_total, 'user_email:', user_email)
         #Add balance
         sub = stripe.Subscription.retrieve(
         subscription
@@ -157,18 +165,13 @@ def stripe_webhook(request, *args, **kwargs):
                                     sub_id = subscription,
                                     is_active = True)
         # print('user',user)
-        if amount_total == 1500:
+        print(amount_total)
+        if amount_total == 799:
             user.point_balance = user.point_balance + 200000
             user.save()
-    # if event["type"] == SUBSCRIPTION_SESSION_UPDATED:
-    #     print('user', user_email)
-        
-    #     current_end_date = event["data"]["object"]["current_period_end"]
-        # user = User.objects.get(email=user_email)
-        # print(user)
-        # user.subscription.start_date = datetime.datetime.now()
-        # user.subscription.end_date = datetime.datetime.fromtimestamp(current_end_date)
-        # user.save()
+        elif amount_total == 499:
+            user.point_balance = user.point_balance + 50000
+            user.save()
     return HttpResponse()
 
 

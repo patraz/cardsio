@@ -1,87 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-{% comment %} <!-- Hero -->
-<div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('../svg/component/polygon-dark.svg')]">
-    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-
-      <!-- Title -->
-      <div class="mt-5 max-w-2xl text-center mx-auto">
-        <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
-          Create your flashcards with
-          <span class="bg-clip-text bg-gradient-to-tl from-blue-600 to-violet-600 text-transparent">Artificial Intelligence</span>
-        </h1>
-      </div>
-      <!-- End Title -->
-  
-      <div class="mt-5 max-w-3xl text-center mx-auto">
-        <p class="text-lg text-gray-600 dark:text-gray-400">Create flashcards from your text input or topic you provided automaticly, download them in csv, excel file or export them to anki with one click</p>
-      </div>
-  
-      <!-- Buttons -->
-      <div class="mt-8 grid gap-3 w-full sm:inline-flex sm:justify-center">
-        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800" href="{% url 'account_login' %}">
-          Get started
-          <svg class="w-3 h-3" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </a>
-      </div>
-      <!-- End Buttons -->
-    </div> {% endcomment %}
 
  
 
 <!-- Hero -->
 <section class="py-10 bg-gradient-to-r sm:py-16 lg:py-24">
-  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  {% comment %} <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     
-      <div class="max-w-xl mx-auto text-center">
-          <h1 class="block text-xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">Create flashcards from your text<span class="bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent"> in seconds</span></h1>
-          <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Create flashcards from your text input or topic you provided, download them in csv, excel file or export them to anki with one click</p>
-          
-          <a href="{% url 'account_login' %}" title="" class="inline-flex items-center justify-center px-6 py-4 mt-10 text-base font-semibold bg-white rounded-md hover: bg-gradient-to-r hover:from-blue-100 hover:to-fuchsia-200">
-              <svg class="w-5 h-5 mr-2 -ml-1 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600  "> Get started for free! Then only 7.99$</span>
-          </a>
-          
-      </div>
+      
+  </div> {% endcomment %}
+  <div class="max-w-3xl mx-auto text-center">
+    <h1 class="block text-xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">The easiest way to create flashcards from your text<span class="bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent"> in seconds</span></h1>
+    <p class="mt-3 text-lg text-gray-800 dark:text-gray-400"><span class="font-semibold text-xl">Unlock your learning potential</span> by creating flashcards from your input on any topic you provide. Download them in <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">ANKI</span> or <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">CSV</span> format, or export them to <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">Excel</span> with just one click!</p>      
+    <a href="/accounts/login/" title="" class="inline-flex items-center justify-center px-6 py-4 mt-10 text-base font-semibold bg-white rounded-md hover: bg-gradient-to-r hover:from-blue-100 hover:to-fuchsia-200">
+        <svg class="w-5 h-5 mr-2 -ml-1 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600  "> Get started for free!</span>
+    </a>
+  </div>
       <div  style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://jumpshare.com/embed/vVywLcV0KLXBFFUUGAXT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="mt-8 rounded-l shadow-xl sm:mt-20" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-      {% comment %} <img src="https://i.imgur.com/pHYY0JX.png" alt="" /> {% endcomment %}
   </div>
 </section>
 
-
-{% comment %} <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
-  <!-- Grid -->
-  <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
-    <div class="lg:col-span-3">
-      <h1 class="block text-xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">Create your flashcards from your text<span class="bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent"> in seconds</span></h1>
-      <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Create flashcards from your text input or topic you provided, download them in csv, excel file or export them to anki with one click</p>
-
-      <!-- Brands -->
-      <div class="mt-6 lg:mt-12">
-        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-r from-fuchsia-600 to-blue-600 hover:from-violet-600 hover:to-fuchsia-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800" href="{% url 'account_login' %}">
-          Get started
-          <svg class="w-3 h-3" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </a>
-      </div>
-      <!-- End Brands -->
-    </div>
-    <!-- End Col -->
-
-    <div class="lg:col-span-4 mt-10 lg:mt-0">
-      <img class="w-full rounded-xl" src="https://i.imgur.com/pHYY0JX.png" alt="Image Description">
-    </div>
-    <!-- End Col -->
-  </div>
-  <!-- End Grid -->
-</div> {% endcomment %}
-<!-- End Hero -->
 
 
 
