@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <link rel="icon" href="https://i.imgur.com/1QOjv3R.png" sizes="any" type="image/svg+xml">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>{% block title %}flashio{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Create your flashcards!" />
-    
+    <meta name="google-site-verification" content="fMgO8SdvqcCeMHDFj-63kOjtxKqpNkxJh5k6f8UTfLM" />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -24,16 +24,22 @@
     {% comment %} <script defer src="{% static 'js/project.js' %}"></script> {% endcomment %}
     {% endblock javascript %}
     
-
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "gfaxbvakhz");
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     
   </head>
 
   <body>
-    <div class="min-h-screen bg-white">
+    <div class="min-h-screen bg-gray-50">
       {% include "navbar.html" %}
-      <div class="py-10">
+      <div class="pb-4">
         <main>
           <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {% if messages %} 
@@ -61,7 +67,7 @@
 
               {% endfor %} 
             {% endif %}
-            <div class="px-4 py-8 sm:px-0">
+            <div class="px-4 py-8 mt-4 sm:px-0">
               {% block content %}
               <p>Use this document as a way to quick start any new project.</p>
               {% endblock content %}
@@ -69,8 +75,27 @@
           </div>
         </main>
       </div>
+      <div>
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <div class="flex items-center justify-between gap-4 py-8">
+            <span class="text-sm text-gray-400"> © 2023 - Present Flashio. All rights reserved. </span>
+    
+            <!-- social - start -->
+            <div class="flex gap-4">
+              <a href="mailto:30p1996@gmail.com" class="text-sm text-gray-400">Contact</a>
+              <a href="mailto:30p1996@gmail.com" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                
+                <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M31.59 11.19 27 7.83V5a1 1 0 0 0-1-1h-4.22L16.59.19a1 1 0 0 0-1.18 0L10.22 4H6a1 1 0 0 0-1 1v2.83L.41 11.19A1 1 0 0 0 0 12v17a3 3 0 0 0 3 3h26a3 3 0 0 0 3-3V12a1 1 0 0 0-.41-.81zM27 10.31l2.2 1.61-2.2 1.31zM16 2.24 18.4 4h-4.8zM7 6h18v8.43l-9 5.4-9-5.4zm-2 4.31v2.93l-2.2-1.32zM2 28.59V13.77l9.26 5.56zM3.41 30 13 20.38l2.46 1.47a1 1 0 0 0 1 0L19 20.38 28.59 30zM30 28.59l-9.26-9.26L30 13.77z"/><path d="M10 9h12v2H10zM12 13h8v2h-8z"/></g>
+                </svg>
+              </a>
+            </div>
+            <!-- social - end -->
+          </div>
+        </div>
+      </div>
     </div>
-
+    
     {% block modal %}{% endblock modal %} 
 	{% block inline_javascript %} 
   <script>

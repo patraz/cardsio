@@ -36,6 +36,7 @@ from users.views import (
     PricingView, 
     CreateCheckoutSessionView, 
     stripe_webhook,
+    cancel_subscription
 ) 
 
 
@@ -57,6 +58,7 @@ urlpatterns = [
     path("pricing/", PricingView.as_view(), name="pricing"),
     path("checkout/<int:price>/", CreateCheckoutSessionView.as_view(), name="checkout"),
     path("stripe/webhook/", stripe_webhook, name="stripe-webhook"),
+    path("stripe/cancel/", cancel_subscription, name="cancel-sub"),
     # Django Admin, use {% url 'admin:index' %}
     # User management
     path("users/", include("users.urls", namespace="users")),

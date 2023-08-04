@@ -40,7 +40,7 @@ def form_text(request):
 
                 get_flashcards_from_text.delay(amount=amount, language=language, subject=subject, text=text, email=request.user.email)
 
-                messages.success(request, 'Creating flashcards can take a while, refresh your decks later')
+                messages.success(request, 'Creating flashcards can take a while, you will get an e-mail when they are done :)')
                 return redirect("user-decks")
 
         # if a GET (or any other method) we'll create a blank form
@@ -126,12 +126,25 @@ class DeckDetailView(generic.ListView):
     
 class DeckDeleteView(generic.DeleteView):
     model = Deck
-    success_url = reverse_lazy('user-decks') # replace 'myapp:index' with the URL name of your view
+    success_url = reverse_lazy('user-decks') # 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'Object deleted successfully.')
         return super().delete(request, *args, **kwargs)
 
 
+# class CsvDownloadView(generic.View):
+#     def get(self, request, *args, **kwargs):
+#         deck = Deck.objects.get(pk=kwargs['pk'])
+#         create_csv(deck.list, deck.pk)
+#         csv_file = f"./csv_files/{deck.pk}.csv"
+#         deck.csv = csv_file
+#         deck.save()
+#         filename = os.path.basename(deck.csv.name)
+#         response = HttpResponse(deck.csv, content_type='text/plain')
+#         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+
+#         return response
+    
 class CsvDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
@@ -140,11 +153,24 @@ class CsvDownloadView(generic.View):
         deck.csv = csv_file
         deck.save()
         filename = os.path.basename(deck.csv.name)
+
+        # Create the FileResponse with the CSV file
         response = HttpResponse(deck.csv, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
+        # Define the after_request hook to delete the CSV file after download
+        def after_request():
+            # Remove the CSV file from the server after download
+            os.remove(deck.csv.path)
+            
+
+        # Attach the after_request hook to the response
+        response.close = after_request
+
         return response
-    
+
+
+
 class XlsxDownloadView(generic.View):
     def get(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=kwargs['pk'])
@@ -155,7 +181,15 @@ class XlsxDownloadView(generic.View):
         filename = os.path.basename(deck.excl.name)
         response = HttpResponse(deck.excl, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        def after_request():
+            # Remove the CSV file from the server after download
+            os.remove(deck.excl.path)
+            
 
+            # Attach the close_response method to the response
+        response.close = after_request
+        # Attach the after_request hook to the response
+        
         return response
     
     
@@ -181,5 +215,12 @@ class ApkgDownloadView(generic.View):
         filename = os.path.basename(deck.anki.name)
         response = HttpResponse(deck.anki, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        def after_request():
+            # Remove the CSV file from the server after download
+            os.remove(deck.anki.path)
+            
+
+        # Attach the after_request hook to the response
+        response.close = after_request
         return response
     

@@ -26,9 +26,9 @@ def get_flashcards_from_prompt(amount, language, user_prompt, email):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are an expert that creates flashcards anout given topic"},
+            {"role": "system", "content": "You are an expert that creates flashcards about given topic"},
             {"role": "user", "content": f"""
-            Create a list of {amount} flashcards in {language} about {user_prompt}.
+            Create a list of {amount} comprehensive flashcards in {language} about {user_prompt}.
             Only provide a  Python list compliant response  following this format without deviation. 
             [
             ["Question":"Answer"],
@@ -69,7 +69,7 @@ def get_flashcards_from_text(subject, text, language, amount, email):
     text = text.replace('\n', '').replace('”','').replace('„','').replace("''", "").replace('""','')
     if language == 'Polish':
         response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-16k",
         messages=[
             {"role": "system", "content": "Jesteś pomocnym asystentem i expertem, który tworzy flashcards na dany temat"},
             {"role": "user", "content": f"""
@@ -78,25 +78,25 @@ def get_flashcards_from_text(subject, text, language, amount, email):
             [
             ["Question":"Answer"],
             ]"""}],
-        temperature=0,
-        max_tokens=2048,
+        temperature=0.5,
+        max_tokens=5000,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0
         )
     else:
         response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-16k",
         messages=[
             {"role": "system", "content": "You are an expert that creates flashcards anout given topic"},
             {"role": "user", "content": f"""
-            Create a list of {amount} flashcards in {language} from this text: {text}.
+            Create a list of {amount} comprehensive flashcards in {language} from this text: {text}.
             Only provide a  Python list compliant response  following this format without deviation. 
             [
             ["Question":"Answer"],
             ]"""}],
-        temperature=0,
-        max_tokens=2048,
+        temperature=0.5,
+        max_tokens=5000,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0

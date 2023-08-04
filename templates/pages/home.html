@@ -1,34 +1,168 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Hero -->
-<div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('../svg/component/polygon-dark.svg')]">
-    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+{% load static %}
 
-      <!-- Title -->
-      <div class="mt-5 max-w-2xl text-center mx-auto">
-        <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
-          Create your flashcards with
-          <span class="bg-clip-text bg-gradient-to-tl from-blue-600 to-violet-600 text-transparent">Artificial Intelligence</span>
-        </h1>
+ 
+
+<!-- Hero -->
+<section class="py-10 bg-gradient-to-r sm:py-16 lg:py-24">
+  {% comment %} <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    
+      
+  </div> {% endcomment %}
+  <div class="max-w-3xl mx-auto text-center">
+    <h1 class="block text-xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">The easiest way to create flashcards from your text<span class="bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent"> in seconds</span></h1>
+    <p class="mt-3 text-lg text-gray-800 dark:text-gray-400"><span class="font-semibold text-xl">Unlock your learning potential</span> by creating flashcards from your input on any topic you provide. Download them in <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">ANKI</span> or <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">CSV</span> format, or export them to <span class="font-bold bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">Excel</span> with just one click!</p>      
+    <a href="{% url 'account_login' %}" title="" class="shadow-lg shadow-fuchsia-600/50 inline-flex items-center justify-center px-6 py-4 mt-10 text-base font-semibold bg-white rounded-md hover: bg-gradient-to-r hover:from-blue-100 hover:to-fuchsia-200">
+        <svg class="w-5 h-5 mr-2 -ml-1 text-fuchsia-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600  "> Get started for free!</span>
+    </a>
+  </div>
+      <div  style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://youtube.com/embed/jIU17Wg_U3c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="mt-8 rounded-l shadow-xl sm:mt-20" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+  </div>
+</section>
+
+
+<div class="my-8 text-center">
+  <h1 class="block text-xl font-bold text-gray-800 sm:text-3xl md:text-5xl lg:text-5xl dark:text-white"><span class="bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600 text-transparent">Testimonials:</span></h1>
+</div>
+<div class="mx-10 lg:grid lg:grid-cols-3 lg:gap-x-12">
+  <div class="border mb-4 p-4 text-gray-800 rounded-lg text-xl shadow-2xl shadow-fuchsia-600/50">
+      <div class="mt-14">
+          <p class="mb-2 text-center text-gray-800 text-xl">
+              "I absolutely love this app"
+          </p>
+          <div class="flex flex-col items-center justify-center">
+            <figcaption class="flex items-center justify-center mt-6 space-x-3">
+              <img class="w-6 h-6 rounded-full" src="https://ph-avatars.imgix.net/5880512/original?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=40&h=40&fit=crop&dpr=1" alt="profile picture">
+              <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                  <div class="pr-3 font-medium text-indigo-600 dark:text-white">Marina P.</div>
+                  <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Flashio subscriber</div>
+              </div>
+            </figcaption>
+          </div>
       </div>
-      <!-- End Title -->
-  
-      <div class="mt-5 max-w-3xl text-center mx-auto">
-        <p class="text-lg text-gray-600 dark:text-gray-400">Create flashcards from your text input or topic you provided automaticly, download them in csv, excel file or export them to anki with one click</p>
-      </div>
-  
-      <!-- Buttons -->
-      <div class="mt-8 grid gap-3 w-full sm:inline-flex sm:justify-center">
-        <a class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white py-3 px-4 dark:focus:ring-offset-gray-800" href="{% url 'account_login' %}">
-          Get started
-          <svg class="w-3 h-3" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </a>
-      </div>
-      <!-- End Buttons -->
+  </div>
+  <div class="border mb-4 p-4 text-gray-800 rounded-lg text-xl shadow-2xl shadow-violet-600/50">
+    <div class="mb-2">
+        <p class="mb-2 text-center text-gray-800 ">
+            "Creating flashcards with Flashio is incredibly simple and quick. I can input my own study materials, making the process tailored to my specific needs."
+        </p>
+        <div class="flex flex-col items-center justify-center">
+          <figcaption class="flex items-center justify-center mt-6 space-x-3">
+            <img class="w-6 h-6 rounded-full" src="https://images.generated.photos/1n4pQBYnqEjYofRk-z1BZAQh4PtZeHNP9pXN5UqVuu4/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MzQ1NjQ3LmpwZw.jpg" alt="profile picture">
+            <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                <div class="pr-3 font-medium text-indigo-600 dark:text-white">Carter M.</div>
+                <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Flashio subscriber</div>
+            </div>
+          </figcaption>
+        </div>
     </div>
   </div>
-  <!-- End Hero -->
+  <div class="border mb-4 p-4 text-gray-800 rounded-lg text-xl shadow-2xl shadow-blue-600/50">
+      <div class="mt-14">
+          <p class="mb-2 text-center text-gray-800 ">
+              "Innovative and game-changing! 🎮"
+          </p>
+          <div class="flex flex-col items-center justify-center">
+            <figcaption class="flex items-center justify-center mt-6 space-x-3">
+              <img class="w-6 h-6 rounded-full" src="https://ph-avatars.imgix.net/5852999/be4ca82b-276d-47d7-a566-1445cf0c5784?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=36&h=36&fit=crop&dpr=1" alt="profile picture">
+              <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                  <div class="pr-3 font-medium text-indigo-600 dark:text-white">Diane H</div>
+                  <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Product Hunt user</div>
+              </div>
+            </figcaption>
+          </div>
+      </div>
+  </div>
+</div>
+
+  <!-- Icon Blocks -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Grid -->
+  <div class="grid md:grid-cols-2 gap-12">
+    <div class="lg:w-3/4">
+      <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
+        Introducing the ultimate flashcard creating app that makes learning a breeze!
+      </h2>
+      <p class="mt-3 text-gray-800 dark:text-gray-400">
+        With our app, you can easily create flashcards from links, prompts, and PDF files, in three different languages. And the best part? You can download your results to Anki, the popular flashcard software.
+      </p>
+      <a class="mt-5 inline-flex items-center gap-x-2 font-medium text-blue-600 dark:text-blue-500" href="{% url 'account_login' %}">
+        Try it today for free and start creating your own customized flashcards in no time!
+        <svg class="w-2.5 h-2.5 transition ease-in-out group-hover:translate-x-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+    <!-- End Col -->
+
+    <div class="space-y-6 lg:space-y-10">
+      <!-- Icon Block -->
+      <div class="flex">
+        <!-- Icon -->
+        <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+          </svg>
+        </span>
+        <div class="ml-5 sm:ml-8">
+          <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Great for learners
+          </h3>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">
+            Our app is the perfect tool for students, language learners, and anyone who wants to improve their memory and knowledge retention.  
+          </p>
+        </div>
+      </div>
+      <!-- End Icon Block -->
+
+      <!-- Icon Block -->
+      <div class="flex">
+        <!-- Icon -->
+        <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+          </svg>
+        </span>
+        <div class="ml-5 sm:ml-8">
+          <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Take your flashcard learning to the next level with our convenient download options
+          </h3>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">
+            With our user-friendly platform, you can easily create your own custom flashcards and download them in multiple formats including CSV, XLSX, and Anki files.
+          </p>
+        </div>
+      </div>
+      <!-- End Icon Block -->
+
+      <!-- Icon Block -->
+      <div class="flex">
+        <!-- Icon -->
+        <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+          </svg>
+        </span>
+        <div class="ml-5 sm:ml-8">
+          <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Affordable price
+          </h3>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">
+            For just $4.99/mo, you can save time, create amazing flashcards daily and skyrocket your grades!
+          </p>
+        </div>
+      </div>
+      <!-- End Icon Block -->
+    </div>
+    <!-- End Col -->
+  </div>
+  <!-- End Grid -->
+</div>
+<!-- End Icon Blocks -->
 
 {% endblock content %}

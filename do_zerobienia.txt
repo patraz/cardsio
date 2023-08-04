@@ -1,0 +1,12 @@
+-stworzyć paginacje w tych viewsach (i w flashcard views) [ zrobione]
+-stworzenie view na wszystkie flashcards jakie ktoś kiedykolwiek zrobił[zrobione]
+-naprawić aktywacje konta emailem [check]
+-stwórz flashcards z podanego tekstu[check]
+-zając sie wyłączaniem messages [check] 
+-update z davinci-003 do chatGPT-3.5-Turbo[check]
+
+-domena pozniej
+-celery i robienie tasków w tle [zrobione] (po tym zwiekszyć limit flashcardów do zrobienia) [zrobioine]
+-staticfiles w jakims BUCKET
+-posprzątać w pokoju
+-deploy nowego projektu uuu

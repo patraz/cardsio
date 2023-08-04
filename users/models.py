@@ -14,8 +14,9 @@ class User(AbstractUser):
     """
 
     #: First and last name do not cover name patterns around the globe
-    point_balance = models.IntegerField(default=1000)
+    point_balance = models.IntegerField(default=5000)
     stripe_customer_id=models.CharField(max_length=200, blank=True, null=True)
+
     def get_absolute_url(self):
         """Get url for user's detail view.
 
@@ -32,3 +33,12 @@ class PointProducts(models.Model):
     def __str__(self):
         return str(self.price)
     
+class Subscription(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription')
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+    sub_id = models.CharField(max_length=150, null=True, blank=True)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.username}'s Subscription"
